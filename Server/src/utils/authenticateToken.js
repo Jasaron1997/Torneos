@@ -19,8 +19,8 @@ export default  function  authenticateToken(req, res, next) {
     if (err) return res.sendStatus(403);
     try {
       const userone = await sequelize.query(`select users.*, rol.NOMBRE_ROL
-      from TB_USUARIO users,
-      TB_ROLES rol,
+      from USUARIOS users,
+      ROLES rol
       where users.ID_ROL=rol.ID_ROL
       and users.USUARIO='${user.USUARIO}'`, { type: sequelize.QueryTypes.SELECT });
       

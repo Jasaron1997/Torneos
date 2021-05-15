@@ -1,13 +1,13 @@
 const { sequelize } = require("../database/database");
 export async function All(req, res) {
   try {
-    const datos = await sequelize.query(`select* from  ROLES   `, {
+    const datos = await sequelize.query(`select* from  TORNEOS   `, {
       replacements: {},
       type: sequelize.QueryTypes.SELECT,
     });
     if (datos) {
       return res.json({
-        message: "SE ENCONTRARON DATOS DE ROLES",
+        message: "SE ENCONTRARON DATOS DE TORNEOS",
         data: datos,
       });
     }
@@ -15,19 +15,19 @@ export async function All(req, res) {
     console.log(error);
     res
       .status(500)
-      .json({ message: "No se pudo encontraron datos del ROLES.", data: [] });
+      .json({ message: "No se pudo encontraron datos del TORNEOS.", data: [] });
   }
 }
 export async function Find(req, res) {
   const { ID } = req.params;
   try {
     const datos = await sequelize.query(
-      `select* from  ROLES where ID_ROL=${ID}  `,
+      `select* from  TORNEOS where ID_TORNEO=${ID}  `,
       { replacements: {}, type: sequelize.QueryTypes.SELECT }
     );
     if (datos) {
       return res.json({
-        message: "SE ENCONTRARON DATOS DE ROLES",
+        message: "SE ENCONTRARON DATOS DE TORNEOS",
         data: datos[0],
       });
     }
@@ -35,28 +35,28 @@ export async function Find(req, res) {
     console.log(error);
     res
       .status(500)
-      .json({ message: "No se pudo encontraron datos del ROLES.", data: [] });
+      .json({ message: "No se pudo encontraron datos del TORNEOS.", data: [] });
   }
 }
 export async function Create(req, res) {
-  const { NOMBRE_ROL, FECHA_CREACION, ID_USUARIO, NIVEL_AUTORIZACION } =
+  const { FECHA_DE_CREACION, ID_USUARIO, ID_MUNICIPIO, ID_DEPARTAMENTO } =
     req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC INSERTAR_ROLES  @NOMBRE_ROL=:NOMBRE_ROL,@FECHA_CREACION=:FECHA_CREACION,@ID_USUARIO=:ID_USUARIO,@NIVEL_AUTORIZACION=:NIVEL_AUTORIZACION                                              `,
+      `EXEC INSERTAR_TORNEOS  @FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_USUARIO=:ID_USUARIO,@ID_MUNICIPIO=:ID_MUNICIPIO,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO                                              `,
       {
         replacements: {
-          NOMBRE_ROL,
-          FECHA_CREACION,
+          FECHA_DE_CREACION,
           ID_USUARIO,
-          NIVEL_AUTORIZACION,
+          ID_MUNICIPIO,
+          ID_DEPARTAMENTO,
         },
         type: sequelize.QueryTypes.SELECT,
       }
     );
     if (datos) {
       return res.json({
-        message: "Operacion realizada con exito del ROLES",
+        message: "Operacion realizada con exito del TORNEOS",
         data: datos,
       });
     }
@@ -65,31 +65,36 @@ export async function Create(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo realizar la operacion del ROLES.",
+        message: "No se pudo realizar la operacion del TORNEOS.",
         data: [],
       });
   }
 }
 export async function Update(req, res) {
-  const { ID_ROL, NOMBRE_ROL, FECHA_CREACION, ID_USUARIO, NIVEL_AUTORIZACION } =
-    req.body;
+  const {
+    ID_TORNEO,
+    FECHA_DE_CREACION,
+    ID_USUARIO,
+    ID_MUNICIPIO,
+    ID_DEPARTAMENTO,
+  } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC ACTUALIZAR_ROLES  @ID_ROL=:ID_ROL,@NOMBRE_ROL=:NOMBRE_ROL,@FECHA_CREACION=:FECHA_CREACION,@ID_USUARIO=:ID_USUARIO,@NIVEL_AUTORIZACION=:NIVEL_AUTORIZACION                                              `,
+      `EXEC ACTUALIZAR_TORNEOS  @ID_TORNEO=:ID_TORNEO,@FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_USUARIO=:ID_USUARIO,@ID_MUNICIPIO=:ID_MUNICIPIO,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO                                              `,
       {
         replacements: {
-          ID_ROL,
-          NOMBRE_ROL,
-          FECHA_CREACION,
+          ID_TORNEO,
+          FECHA_DE_CREACION,
           ID_USUARIO,
-          NIVEL_AUTORIZACION,
+          ID_MUNICIPIO,
+          ID_DEPARTAMENTO,
         },
         type: sequelize.QueryTypes.SELECT,
       }
     );
     if (datos) {
       return res.json({
-        message: "Operacion realizada con exito del ROLES",
+        message: "Operacion realizada con exito del TORNEOS",
         data: datos,
       });
     }
@@ -98,21 +103,21 @@ export async function Update(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo realizar la operacion del ROLES.",
+        message: "No se pudo realizar la operacion del TORNEOS.",
         data: [],
       });
   }
 }
 export async function Delete(req, res) {
-  const { ID_ROL } = req.body;
+  const { ID_TORNEO } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC ELIMINAR_ROLES  @ID_ROL=:ID_ROL                                              `,
-      { replacements: { ID_ROL }, type: sequelize.QueryTypes.SELECT }
+      `EXEC ELIMINAR_TORNEOS  @ID_TORNEO=:ID_TORNEO                                              `,
+      { replacements: { ID_TORNEO }, type: sequelize.QueryTypes.SELECT }
     );
     if (datos) {
       return res.json({
-        message: "Operacion realizada con exito del ROLES",
+        message: "Operacion realizada con exito del TORNEOS",
         data: datos,
       });
     }
@@ -121,7 +126,7 @@ export async function Delete(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo realizar la operacion del ROLES.",
+        message: "No se pudo realizar la operacion del TORNEOS.",
         data: [],
       });
   }

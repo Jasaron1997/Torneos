@@ -5,8 +5,8 @@ export async function auth(req, res) {
   const acceso = req.user;
   try {
     const userone = await sequelize.query(`select users.*, rol.NOMBRE_ROL
-    from TB_USUARIO users,
-    TB_ROLES rol,
+    from USUARIOS users,
+    ROLES rol
     where users.ID_ROL=rol.ID_ROL
     and users.USUARIO='${acceso.USUARIO}'`, { type: sequelize.QueryTypes.SELECT });
     if (userone[0]) {

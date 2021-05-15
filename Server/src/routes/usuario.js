@@ -4,13 +4,13 @@ import authenticateToken from '../utils/authenticateToken';
 
 
 // Controllers
-import {getUsuario,postUsuario,deleteUsuario,getOneUsuario,putUsuario} from '../controllers/usuario.controller';
+import {Create,Update,Delete,All,Find} from '../controllers/usuario.controller';
 // Routes
-router.post('/',authenticateToken, postUsuario);
-router.get('/',authenticateToken, getUsuario);
-router.delete('/:ID_USUARIO',authenticateToken, deleteUsuario);
-router.put('/:ID_USUARIO',authenticateToken, putUsuario);
-router.get('/:ID_USUARIO',authenticateToken, getOneUsuario);
+router.post('/Create',authenticateToken, Create);
+router.get('/All',authenticateToken, All);
+router.post('/Delete',authenticateToken, Delete);
+router.put('/Update',authenticateToken, Update);
+router.get('/FIND/:ID',authenticateToken, Find);
 
 
 export default router;

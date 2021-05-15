@@ -9,40 +9,22 @@ const app = express();
 app.use(cors(config));
 
 // Import routes
+//import accessRoutes from "./routes/access";
 import accessRoutes from "./routes/access";
-import pilotoRoutes from "./routes/piloto";
-import empresaRoutes from "./routes/empresa";
-
-import tipoUnidadRouter from "./routes/tipoUnidad";
-import tarjeta from "./routes/tarjeta";
-
-import unidadRouter from "./routes/unidad";
-
-
-import rolesRouter from "./routes/roles";
-
-
-import usuarioRouter from "./routes/usuario";
-
-import estacionRouter from "./routes/estacion";
-
-import combustibleRouter from "./routes/combustible";
-
-import precioCombustibleDiaRouter from "./routes/precioCombustibleDia";
-
-import asignacionCombustibleRouter from "./routes/asignacionCombustible";
-
-import asignacionTarjetaUnidadRouter from "./routes/asignacionTarjetaUnidad";
-
-
-import consumoCombustibleRouter from "./routes/consumoCombustible";
-import detalleConsumoCombustibleRouter from "./routes/detalleConsumoCombustible";
-import accessRolRouter from "./routes/accessRol";
+import arbitrosRoutes from "./routes/arbitros";
 import authRoutes from "./routes/auth";
 import authenticateTokenRoutes from "./routes/authenticateToken";
-
-import reportesRoutes from "./routes/reportes";
-
+import bloquesRoutes from "./routes/bloques";
+import departamentosRoutes from "./routes/departamentos";
+import entrenadoresRoutes from "./routes/entrenadores";
+import jugadoresRoutes from "./routes/jugadores";
+import jugadoresPorEquipoRoutes from "./routes/jugadoresPorEquipo";
+import municipiosRoutes from "./routes/municipios";
+import partidosRoutes from "./routes/partidos";
+import posicionesRoutes from "./routes/posiciones";
+import rolesRoutes from "./routes/roles";
+import torneosRoutes from "./routes/torneos";
+import usuarioRoutes from "./routes/usuario";
 
 
 
@@ -51,39 +33,23 @@ app.use(morgan("dev"));
 app.use(json());
 
 // Routes
-app.use("/api/acceso", accessRoutes);
-app.use("/api/piloto", pilotoRoutes);
-app.use("/api/empresa", empresaRoutes);
-
-app.use("/api/tipounidad",tipoUnidadRouter);
-app.use("/api/tarjeta",tarjeta);
-
-app.use("/api/unidad",unidadRouter);
-
-app.use("/api/roles",rolesRouter);
-
-app.use("/api/usuario",usuarioRouter);
-
-app.use("/api/estacion",estacionRouter);
-
-app.use("/api/combustible",combustibleRouter);
-
-app.use("/api/preciocombustibledia",precioCombustibleDiaRouter);
-
-app.use("/api/asignaciontarjetaunidad",asignacionTarjetaUnidadRouter);
-app.use("/api/asignacioncombustible",asignacionCombustibleRouter);
+app.use("/api/access",accessRoutes);
+app.use("/api/arbitros",arbitrosRoutes);
+app.use("/api/auth",authRoutes);
+app.use("/api/authenticateToken",authenticateTokenRoutes);
+app.use("/api/bloques",bloquesRoutes);
+app.use("/api/departamentos",departamentosRoutes);
+app.use("/api/entrenadores",entrenadoresRoutes);
+app.use("/api/jugadores",jugadoresRoutes);
+app.use("/api/jugadores_Por_Equipo",jugadoresPorEquipoRoutes);
+app.use("/api/municipios",municipiosRoutes);
+app.use("/api/partidos",partidosRoutes);
+app.use("/api/posiciones",posicionesRoutes);
+app.use("/api/roles",rolesRoutes);
+app.use("/api/torneos",torneosRoutes);
+app.use("/api/usuarios",usuarioRoutes);
 
 
 
-app.use("/api/consumocombustible",consumoCombustibleRouter);
-app.use("/api/detalleconsumocombustible",detalleConsumoCombustibleRouter);
-
-app.use("/api/accessrol",accessRolRouter);
-
-
-app.use("/api/auth", authRoutes);
-app.use("/api/authenticateToken", authenticateTokenRoutes);
-
-app.use("/api/reportes", reportesRoutes);
 
 export default app;

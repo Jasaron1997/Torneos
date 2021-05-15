@@ -1,13 +1,13 @@
 const { sequelize } = require("../database/database");
 export async function All(req, res) {
   try {
-    const datos = await sequelize.query(`select* from  USUARIOS   `, {
+    const datos = await sequelize.query(`select* from  ARBITROS   `, {
       replacements: {},
       type: sequelize.QueryTypes.SELECT,
     });
     if (datos) {
       return res.json({
-        message: "SE ENCONTRARON DATOS DE USUARIOS",
+        message: "SE ENCONTRARON DATOS DE ARBITROS",
         data: datos,
       });
     }
@@ -16,7 +16,7 @@ export async function All(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo encontraron datos del USUARIOS.",
+        message: "No se pudo encontraron datos del ARBITROS.",
         data: [],
       });
   }
@@ -25,12 +25,12 @@ export async function Find(req, res) {
   const { ID } = req.params;
   try {
     const datos = await sequelize.query(
-      `select* from  USUARIOS where ID_USUARIO=${ID}  `,
+      `select* from  ARBITROS where ID_ARBITRO=${ID}  `,
       { replacements: {}, type: sequelize.QueryTypes.SELECT }
     );
     if (datos) {
       return res.json({
-        message: "SE ENCONTRARON DATOS DE USUARIOS",
+        message: "SE ENCONTRARON DATOS DE ARBITROS",
         data: datos[0],
       });
     }
@@ -39,7 +39,7 @@ export async function Find(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo encontraron datos del USUARIOS.",
+        message: "No se pudo encontraron datos del ARBITROS.",
         data: [],
       });
   }
@@ -50,31 +50,35 @@ export async function Create(req, res) {
     NOMBRE2,
     APELLIDO1,
     APELLIDO2,
-    CONTRA_USUARIO,
+    NOMBRE_COMPLETO,
+    ID_USUARIO,
+    DIRECCION,
+    ID_DEPARTAMENTO,
+    ID_MUNICIPIO,
     FECHA_DE_CREACION,
-    ID_ROL,
-    USUARIO,
   } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC INSERTAR_USUARIOS  @NOMBRE1=:NOMBRE1,@NOMBRE2=:NOMBRE2,@APELLIDO1=:APELLIDO1,@APELLIDO2=:APELLIDO2,@CONTRA_USUARIO=:CONTRA_USUARIO,@FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_ROL=:ID_ROL,@USUARIO=:USUARIO                                              `,
+      `EXEC INSERTAR_ARBITROS  @NOMBRE1=:NOMBRE1,@NOMBRE2=:NOMBRE2,@APELLIDO1=:APELLIDO1,@APELLIDO2=:APELLIDO2,@NOMBRE_COMPLETO=:NOMBRE_COMPLETO,@ID_USUARIO=:ID_USUARIO,@DIRECCION=:DIRECCION,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO,@ID_MUNICIPIO=:ID_MUNICIPIO,@FECHA_DE_CREACION=:FECHA_DE_CREACION                                              `,
       {
         replacements: {
           NOMBRE1,
           NOMBRE2,
           APELLIDO1,
           APELLIDO2,
-          CONTRA_USUARIO,
+          NOMBRE_COMPLETO,
+          ID_USUARIO,
+          DIRECCION,
+          ID_DEPARTAMENTO,
+          ID_MUNICIPIO,
           FECHA_DE_CREACION,
-          ID_ROL,
-          USUARIO,
         },
         type: sequelize.QueryTypes.SELECT,
       }
     );
     if (datos) {
       return res.json({
-        message: "Operacion realizada con exito del USUARIOS",
+        message: "Operacion realizada con exito del ARBITROS",
         data: datos,
       });
     }
@@ -83,44 +87,48 @@ export async function Create(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo realizar la operacion del USUARIOS.",
+        message: "No se pudo realizar la operacion del ARBITROS.",
         data: [],
       });
   }
 }
 export async function Update(req, res) {
   const {
-    ID_USUARIO,
+    ID_ARBITRO,
     NOMBRE1,
     NOMBRE2,
     APELLIDO1,
     APELLIDO2,
-    CONTRA_USUARIO,
+    NOMBRE_COMPLETO,
+    ID_USUARIO,
+    DIRECCION,
+    ID_DEPARTAMENTO,
+    ID_MUNICIPIO,
     FECHA_DE_CREACION,
-    ID_ROL,
-    USUARIO,
   } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC ACTUALIZAR_USUARIOS  @ID_USUARIO=:ID_USUARIO,@NOMBRE1=:NOMBRE1,@NOMBRE2=:NOMBRE2,@APELLIDO1=:APELLIDO1,@APELLIDO2=:APELLIDO2,@CONTRA_USUARIO=:CONTRA_USUARIO,@FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_ROL=:ID_ROL,@USUARIO=:USUARIO                                              `,
+      `EXEC ACTUALIZAR_ARBITROS  @ID_ARBITRO=:ID_ARBITRO,@NOMBRE1=:NOMBRE1,@NOMBRE2=:NOMBRE2,@APELLIDO1=:APELLIDO1,@APELLIDO2=:APELLIDO2,@NOMBRE_COMPLETO=:NOMBRE_COMPLETO,@ID_USUARIO=:ID_USUARIO,@DIRECCION=:DIRECCION,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO,@ID_MUNICIPIO=:ID_MUNICIPIO,@FECHA_DE_CREACION=:FECHA_DE_CREACION                                              `,
       {
         replacements: {
-          ID_USUARIO,
+          ID_ARBITRO,
           NOMBRE1,
           NOMBRE2,
           APELLIDO1,
           APELLIDO2,
-          CONTRA_USUARIO,
+          NOMBRE_COMPLETO,
+          ID_USUARIO,
+          DIRECCION,
+          ID_DEPARTAMENTO,
+          ID_MUNICIPIO,
           FECHA_DE_CREACION,
-          ID_ROL,
-          USUARIO,
         },
         type: sequelize.QueryTypes.SELECT,
       }
     );
     if (datos) {
       return res.json({
-        message: "Operacion realizada con exito del USUARIOS",
+        message: "Operacion realizada con exito del ARBITROS",
         data: datos,
       });
     }
@@ -129,21 +137,21 @@ export async function Update(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo realizar la operacion del USUARIOS.",
+        message: "No se pudo realizar la operacion del ARBITROS.",
         data: [],
       });
   }
 }
 export async function Delete(req, res) {
-  const { ID_USUARIO } = req.body;
+  const { ID_ARBITRO } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC ELIMINAR_USUARIOS  @ID_USUARIO=:ID_USUARIO                                              `,
-      { replacements: { ID_USUARIO }, type: sequelize.QueryTypes.SELECT }
+      `EXEC ELIMINAR_ARBITROS  @ID_ARBITRO=:ID_ARBITRO                                              `,
+      { replacements: { ID_ARBITRO }, type: sequelize.QueryTypes.SELECT }
     );
     if (datos) {
       return res.json({
-        message: "Operacion realizada con exito del USUARIOS",
+        message: "Operacion realizada con exito del ARBITROS",
         data: datos,
       });
     }
@@ -152,7 +160,7 @@ export async function Delete(req, res) {
     res
       .status(500)
       .json({
-        message: "No se pudo realizar la operacion del USUARIOS.",
+        message: "No se pudo realizar la operacion del ARBITROS.",
         data: [],
       });
   }

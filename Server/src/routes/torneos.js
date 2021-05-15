@@ -4,7 +4,7 @@ import authenticateToken from '../utils/authenticateToken';
 
 
 // Controllers
-import {Create,Update,Delete,All,Find} from '../controllers/usuario.controller';
+import {Create,Update,Delete,All,Find} from '../controllers/torneos.controller';
 // Routes
 router.post('/Create',authenticateToken, Create);
 router.get('/All',authenticateToken, All);
