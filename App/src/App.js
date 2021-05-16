@@ -15,8 +15,8 @@ import Inicio from "./components/Inicio";
 
 //roles
 import Rol from "./components/Seguridad/Roles";
-import RolNuevo from "./components/Seguridad/Roles/RolNuevo";
-import RolEditar from "./components/Seguridad/Roles/RolEditar";
+import RolNuevo from "./components/Seguridad/Roles/Nuevo";
+import RolEditar from "./components/Seguridad/Roles/Editar";
 
 //asign
 
@@ -26,8 +26,43 @@ import Asing from "./components/Seguridad/Asing/Asing";
 import Usuario from "./components/Seguridad/Usuario";
 import UsuarioNuevo from "./components/Seguridad/Usuario/UsuarioNuevo";
 import UsuarioEditar from "./components/Seguridad/Usuario/UsuarioEditar";
-
 import CambioContra from "./components/Seguridad/Usuario/CambioContra";
+
+//catalogos
+import Arbitros from "./components/Catalogos/Arbitros";
+import ArbitrosEditar from "./components/Catalogos/Arbitros/Editar";
+import ArbitrosNuevo from "./components/Catalogos/Arbitros/Nuevo";
+import Bloques from "./components/Catalogos/Bloques";
+import BloquesEditar from "./components/Catalogos/Bloques/Editar";
+import BloquesNuevo from "./components/Catalogos/Bloques/Nuevo";
+import Departamentos from "./components/Catalogos/Departamentos";
+import DepartamentosEditar from "./components/Catalogos/Departamentos/Editar";
+import DepartamentosNuevo from "./components/Catalogos/Departamentos/Nuevo";
+import Entrenadores from "./components/Catalogos/Entrenadores";
+import EntrenadoresEditar from "./components/Catalogos/Entrenadores/Editar";
+import EntrenadoresNuevo from "./components/Catalogos/Entrenadores/Nuevo";
+import Jugadores from "./components/Catalogos/Jugadores";
+import JugadoresEditar from "./components/Catalogos/Jugadores/Editar";
+import JugadoresNuevo from "./components/Catalogos/Jugadores/Nuevo";
+import Municipios from "./components/Catalogos/Municipios";
+import MunicipiosEditar from "./components/Catalogos/Municipios/Editar";
+import MunicipiosNuevo from "./components/Catalogos/Municipios/Nuevo";
+
+//equipos
+import Equipos from "./components/Equipos/Equipos";
+import EquiposEditar from "./components/Equipos/Equipos/Editar";
+import EquiposNuevo from "./components/Equipos/Equipos/Nuevo";
+import JugadoresPorEquipo from "./components/Equipos/JugadoresPorEquipo";
+import JugadoresPorEquipoEditar from "./components/Equipos/JugadoresPorEquipo/Editar";
+import JugadoresPorEquipoNuevo from "./components/Equipos/JugadoresPorEquipo/Nuevo";
+
+//Torneos
+import Torneos from "./components/Torneos/Torneos";
+import TorneosEditar from "./components/Torneos/Torneos/Editar";
+import TorneosNuevo from "./components/Torneos/Torneos/Nuevo";
+import Partidos from "./components/Torneos/Partidos";
+import PartidosEditar from "./components/Torneos/Partidos/Editar";
+import PartidosNuevo from "./components/Torneos/Partidos/Nuevo";
 
 
 class App extends Component {
@@ -59,29 +94,28 @@ if(data)
     const { auth  } = this.state;
     // console.log('auth',auth)
     let resultadoBusqueda;
-
-    if(auth){
-      auth.map((data, index) => {
-        // console.log(data.NOMBRE_ACCESO,data.NOMBRE_ACCESO === acceso)
-        // return data.accesses.map((acc, index_p) => {
-          if (data.NOMBRE_ACCESO === acceso) {
+return true;
+    // if(auth){
+    //   auth.map((data, index) => {
+    //       if (data.NOMBRE_ACCESO === acceso) {
   
 
-            resultadoBusqueda = true;
-            return true;
-          } else {
-            return false;
-          }
-        // });
-      });
-    }
-    else{
-      return false;
-    }
-    return !!resultadoBusqueda;
+    //         resultadoBusqueda = true;
+    //         return true;
+    //       } else {
+    //         return false;
+    //       }
+    //   });
+    // }
+    // else{
+    //   return false;
+    // }
+    // return !!resultadoBusqueda;
   };
 
   auth = (auth) => {
+    auth[0].NOMBRE_COMPLETO=auth[0].NOMBRE1+" "+auth[0].NOMBRE2+" "+auth[0].APELLIDO1+" "+auth[0].APELLIDO2
+    
     this.setState({
       auth,
     });
@@ -96,7 +130,7 @@ if(data)
   render() {
     const mensaje = this.state.auth ? (
       <Fragment> 
-      <p>{`Bienvenido: ${this.state.auth[0].NOMBRE_USUARIO}`}</p>
+      <p>{`Bienvenido: ${this.state.auth[0].NOMBRE_COMPLETO}`}</p>
       <button className="btn btn-light" onClick={this.cerrarsesion}>Cerrar Sesion</button>
 </Fragment>
       // `Bienvenido: Prueba de login`
@@ -116,18 +150,6 @@ if(data)
           <Route exact path={`${process.env.PUBLIC_URL}/login`} render={() => <Login auth={this.auth}   Access={this.Access}/>} />
        
           
-          {/* Acceso */}
-          <Route exact path={`${process.env.PUBLIC_URL}/acceso`} render={() => <Acceso Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/acceso/crear`} render={() => <AccesoNuevo Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/acceso/detalle/:id`} render={() => <AccesoEditar  modificar={false} Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/acceso/modificar/:id`} render={() => <AccesoEditar modificar={true} Access={this.Access}/>} />
-          {/*Roles */}
-          <Route exact path={`${process.env.PUBLIC_URL}/roles`} render={() => <Rol Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/roles/crear`} render={() => <RolNuevo Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/roles/detalle/:id`} render={() => <RolEditar modificar={false} Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/roles/modificar/:id`} render={() => <RolEditar modificar={true} Access={this.Access}/>} />
-          {/* Asing */}
-          <Route exact path={`${process.env.PUBLIC_URL}/Asing/:id`} render={() => <Asing Access={this.Access}/>} />
           {/*Usuario*/}
           <Route exact path={`${process.env.PUBLIC_URL}/usuarios`} render={() => <Usuario Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/usuarios/crear`} render={() => <UsuarioNuevo Access={this.Access} auth={this.state.auth}/>} />

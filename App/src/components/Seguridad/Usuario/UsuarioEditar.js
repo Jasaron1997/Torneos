@@ -6,16 +6,6 @@
   import makeAnimated from "react-select/animated";
 
   const initialState = {
-     ID_USUARIO:"",
-     CONTRA_USUARIO:""
-    ,ID_ROL:""
-    ,NOMBRE_USUARIO:""
-    ,DIRECCION_USUARIO:""
-    ,DPI_USUARIO:""
-    ,TELEFONO_USUARIO:""
-    ,ESTADO:"1"
-    ,ID_EMPRESAR:2
-    ,ID_ESTACION:1
   };
   
   class UsuarioEditar extends Component {
@@ -37,64 +27,30 @@
     };
   
     validarForm = () => {
-      const {USUARIO_USUARIOR
-        ,CONTRA_USUARIOR,ID_ROLR,NOMBRE_USUARIOR,DIRECCION_USUARIOR,DPI_USUARIOR
-        ,TELEFONO_USUARIOR } = this.state;
-      const noValido = !USUARIO_USUARIOR || !CONTRA_USUARIOR|| !ID_ROLR|| !NOMBRE_USUARIOR|| !DIRECCION_USUARIOR|| !DPI_USUARIOR|| !TELEFONO_USUARIOR;
-
-    console.log(USUARIO_USUARIOR
-      ,CONTRA_USUARIOR,ID_ROLR,NOMBRE_USUARIOR,DIRECCION_USUARIOR,DPI_USUARIOR
-      ,TELEFONO_USUARIOR )
+      const {USUARIO
+        ,CONTRA_USUARIO,ID_ROL,NOMBRE1,NOMBRE2,APELLIDO1
+        ,APELLIDO2 } = this.state;
+      const noValido = !USUARIO || !CONTRA_USUARIO|| !ID_ROL|| !NOMBRE1|| !NOMBRE2|| !APELLIDO1|| !APELLIDO2;
       return noValido;
     };
   
     async componentDidMount() {
       const { id } = this.props.match.params;
-  
       const data = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/usuario/${id}`
+        `${process.env.REACT_APP_SERVER}/api/usuarios/find/${id}`
       );
-      this.setState({ ...data.data[0] });
+      this.setState({ ...data.data });
 
-      this.setState({  
-       ID_USUARIOR:data.data[0].ID_USUARIO
-      ,CONTRA_USUARIOR:data.data[0].CONTRA_USUARIO
-      ,NOMBRE_USUARIOR:data.data[0].NOMBRE_USUARIO
-      ,DIRECCION_USUARIOR:data.data[0].DIRECCION_USUARIO
-      ,DPI_USUARIOR:data.data[0].DPI_USUARIO
-      ,TELEFONO_USUARIOR:data.data[0].TELEFONO_USUARIO
-      ,USUARIO_USUARIOR:data.data[0].USUARIO_USUARIO
-      ,ID_ESTACIONR:data.data[0].ID_ESTACION
-        });
       const dataRol = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/roles`
+        `${process.env.REACT_APP_SERVER}/api/roles/all`
       );
       
       const Roles=dataRol.data;
-      const Rol=Roles.find(rol=>rol.ID_ROL===data.data[0].ID_ROL)
+      const Rol=Roles.find(rol=>rol.ID_ROL===data.data.ID_ROL)
 
       this.setState({Rol, Roles,ID_ROLR:Rol.ID_ROL });
  
 
-      const Empresas = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/empresa`
-      );
-      const Empresa = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/empresa/${data.data[0].ID_EMPRESA}`
-      );
-      this.setState({ Empresas:Empresas.data,Empresa:Empresa.data[0],ID_EMPRESAR:Empresa.data[0].ID_EMPRESA});
-  
-  
-      const Estacion = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/estacion/${data.data[0].ID_ESTACION}`
-      );
-     
-      const Estaciones = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/estacion`
-      );
-      this.setState({ Estaciones:Estaciones.data, Estacion:Estacion.data[0],ID_ESTACIONR:Estacion.data[0].ID_ESTACION});
-  
-  
     }
   
     updateStateSelectRol = (Rol) => {
@@ -103,22 +59,11 @@
       });
     };
 
-    updateStateSelectEstacion= (Estacion) => {
-      this.setState({Estacion,
-        ID_ESTACIONR:Estacion.ID_ESTACION,
-      });
-    };
-  
-    updateStateSelectEmpresa= (Empresa) => {
-      this.setState({Empresa,
-        ID_EMPRESAR:Empresa.ID_EMPRESA,
-      });
-    };
     UsuarioEditar = async (e) => {
       e.preventDefault();
   
       const data = await fetchPut(
-        `${process.env.REACT_APP_SERVER}/api/usuario/${this.state.ID_USUARIO}`,
+        `${process.env.REACT_APP_SERVER}/api/usuarios/Update`,
         this.state
       );
       this.setState({ data: data.data });
@@ -152,7 +97,7 @@
                 <label>Usuario:</label>
                 <input
                   type="text"
-                  name="USUARIO_USUARIOR"
+                  name="USUARIO"
                   className="form-control"
                   placeholder="Nombre"
                   onChange={this.UpdateState}
@@ -166,7 +111,7 @@
                   type={ this.props.Access("VerContra") ? (
         "text"
       ) : "password"}
-                  name="CONTRA_USUARIOR"
+                  name="CONTRA_USUARIO"
                   className="form-control"
                   placeholder="Descripcion de la acceso"
                   onChange={this.UpdateState}
@@ -200,116 +145,55 @@
 
 
               </div>
-              <div className="form-group">
-                <label>Estacion:</label>
-                {/* <input
-                  type="text"
-                  name="ID_ROL"
-                  className="form-control"
-                  placeholder="Id Rol"
-                  onChange={this.UpdateState}
-                  defaultValue={this.state.ID_ROL}
-                /> */}
-                <Select
-                onChange={this.updateStateSelectEstacion}
-                options={this.state.Estaciones}
-                isMulti={false}
-                components={makeAnimated()}
-                isDisabled={!this.props.modificar}
-                placeholder={"Seleccione la Estacion"}
-                getOptionLabel={(options) => options.NOMBRE_ESTACON}
-                getOptionValue={(options) => options.ID_ESTACION}
-                value={this.state.Estacion}
-              />
-              </div>
-       
-              <div className="form-group">
-                <label>Nombre Usuario:</label>
+                       <div className="form-group">
+                <label>NOMBRE1:</label>
                 <input
                   type="text"
-                  name="NOMBRE_USUARIOR"
+                  name="NOMBRE1"
                   className="form-control"
-                  placeholder="Nombre"
+                  placeholder="NOMBRE1"
                   onChange={this.UpdateState}
                   readOnly={!this.props.modificar}
-                  defaultValue={this.state.NOMBRE_USUARIO}
+                  defaultValue={this.state.NOMBRE1}
                 />
               </div>
-
-              <div className="form-group">
-                <label>Direccion Usuario:</label>
+                       <div className="form-group">
+                <label>NOMBRE2:</label>
                 <input
                   type="text"
-                  name="DIRECCION_USUARIOR"
+                  name="NOMBRE2"
                   className="form-control"
-                  placeholder="Direccion"
+                  placeholder="NOMBRE2"
                   onChange={this.UpdateState}
                   readOnly={!this.props.modificar}
-                  defaultValue={this.state.DIRECCION_USUARIO}
+                  defaultValue={this.state.NOMBRE2}
                 />
               </div>
-
-
-              <div className="form-group">
-                <label> DPI Usuario:</label>
+                       <div className="form-group">
+                <label>APELLIDO1:</label>
                 <input
                   type="text"
-                  name="DPI_USUARIOR"
+                  name="APELLIDO1"
                   className="form-control"
-                  placeholder="DPI"
+                  placeholder="APELLIDO1"
                   onChange={this.UpdateState}
                   readOnly={!this.props.modificar}
-                  defaultValue={this.state.DPI_USUARIO}
+                  defaultValue={this.state.APELLIDO1}
                 />
               </div>
-
-              <div className="form-group">
-                <label>Telefono:</label>
+                       <div className="form-group">
+                <label>APELLIDO2:</label>
                 <input
                   type="text"
-                  name="TELEFONO_USUARIOR"
+                  name="APELLIDO2"
                   className="form-control"
-                  placeholder="Telefono"
+                  placeholder="APELLIDO2"
                   onChange={this.UpdateState}
                   readOnly={!this.props.modificar}
-                  defaultValue={this.state.TELEFONO_USUARIO}
+                  defaultValue={this.state.APELLIDO2}
                 />
               </div>
-              <div className="form-group">
-                <label>Id Empresa:</label>
-                {/* <input
-                  type="text"
-                  name="ID_EMPRESA"
-                  className="form-control"
-                  placeholder="Id Empresa"
-                  onChange={this.UpdateState}
-                  defaultValue={this.state.ID_EMPRESA}
-                /> */}
-                <Select
-                onChange={this.updateStateSelectEmpresa}
-                options={this.state.Empresas}
-                isMulti={false}
-                isDisabled={!this.props.Access("CambioEmpresa") || !this.props.modificar}
-                components={makeAnimated()}
-                placeholder={"Seleccione el Rol"}
-                getOptionLabel={(options) => options.NOMBRE_EMPRESA}
-                getOptionValue={(options) => options.ID_EMPRESA}
-                value={this.state.Empresa}
-              />
-              </div>
-              {/* <div className="form-group">
-                <label>Estado:</label>
-                <input
-                  type="text"
-                  name="ESTADO"
-                  className="form-control"
-                  placeholder="Estadp del usuario"
-                  onChange={this.UpdateState}
-                  readOnly={!this.props.modificar}
-                  defaultValue={this.state.ESTADO}
-                />
-              </div> */}
-              
+             
               {this.props.modificar &&(
               <button
                 // disabled={this.validarForm()}

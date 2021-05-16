@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { fetchGet, fetchDelete} from "../../../utils/Fetch";
+import { fetchGet, fetchDelete, fetchPost} from "../../../utils/Fetch";
 import { Link, Redirect } from "react-router-dom";
 
 const estadoInicial = { BuscarDatos: "", data: null,};
@@ -11,8 +11,8 @@ class Usuario extends Component {
   }
 
   Buscar = async () =>{
-    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/usuario`);
-    this.setState({ dataFiltrada: data.data, data: data.data,estado:"Re Activar" });
+    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/usuarios/all`);
+    this.setState({ dataFiltrada: data.data, data: data.data });
   }
 
    componentDidMount() {
@@ -30,7 +30,7 @@ class Usuario extends Component {
   BuscarDatos = (e) => {
     e.preventDefault();
     const patt = new RegExp(`${this.state.BuscarDatos}`, "gi");
-    const datos = this.state.data.filter((dat) => patt.exec(dat.NOMBRE_USUARIO));
+    const datos = this.state.data.filter((dat) => patt.exec(dat.USUARIO));
 
     this.setState({
       dataFiltrada: datos,
@@ -45,12 +45,19 @@ class Usuario extends Component {
   };
 
   Eliminar = async (ID_USUARIO) => {
-    const data = await fetchDelete(
-      `${process.env.REACT_APP_SERVER}/api/usuario/${ID_USUARIO}/${false}`
+
+await this.setState({
+  Eliminar:{
+    ID_USUARIO:ID_USUARIO
+  }
+})
+
+    const data = await fetchPost(
+      `${process.env.REACT_APP_SERVER}/api/usuarios/delete`,this.state.Eliminar
     );
     alert(data.message);
     const dataGet = await fetchGet(
-      `${process.env.REACT_APP_SERVER}/api/usuario`
+      `${process.env.REACT_APP_SERVER}/api/usuarios/all`
     );
     this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
   };
@@ -71,18 +78,11 @@ else{
 
   Reactivar = async (ID_USUARIO) => {
     const data = await fetchDelete(
-      `${process.env.REACT_APP_SERVER}/api/usuario/${ID_USUARIO}/${true}`
+      `${process.env.REACT_APP_SERVER}/api/usuario/delete/${ID_USUARIO}/${true}`
     );
     alert(data.message);
    this.Inactivos();
   };
-
-  Inactivos = async () => {
-  const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/usuario/inactivo`);
-  this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
-};
-
-
 
   render() {
     const redireccion = this.props.Access("VerUsuarios") ? (
@@ -137,12 +137,12 @@ else{
         {this.state.dataFiltrada && (
           <div className="ml-5 mr-5">
             <div className="row border">
-              <div className="col-md-2 col-sm-12 col-xs-2">USUARIO</div>
+              <div className="col-md-2 col-sm-12 col-xs-2">NOMBRE1</div>
              {/* <div className="col-md-2  d-none  d-sm-block ">Contraseña</div> */}
-              <div className="col-md-2   d-none  d-sm-block">NOMBRE</div>
-              <div className="col-md-2 d-none  d-sm-block">DIRECCION</div>
-              <div className="col-md-2  d-none  d-sm-block ">DPI</div>
-              <div className="col-md-1   d-none  d-sm-block">TELEFONO</div>
+              <div className="col-md-2   d-none  d-sm-block">NOMBRE2</div>
+              <div className="col-md-2 d-none  d-sm-block">APELLIDO1</div>
+              <div className="col-md-2  d-none  d-sm-block ">APELLIDO2</div>
+              <div className="col-md-1   d-none  d-sm-block">USUARIO</div>
               <div className="col-sm-3 col-xs-3">OPCIONES</div>
 
             </div>
@@ -150,15 +150,15 @@ else{
               const { ID_USUARIO } = item;
               return (
                 <div className="row border" key={ID_USUARIO}>
-                  <div className="col-md-2 col-sm-6 col-xs-2">{item.USUARIO_USUARIO}</div>
+                  <div className="col-md-2 col-sm-6 col-xs-2">{item.NOMBRE1}</div>
                   {/* <div className="col-md-2 col-sm-6 col-xs-4">{item.CONTRA_USUARIO}</div> */}
-                  <div className="col-md-2 col-sm-6 col-xs-2">{item.NOMBRE_USUARIO}</div>
-                  <div className="col-md-2  d-none  d-sm-block ">{item.DIRECCION_USUARIO}</div>
-                  <div className="col-md-2  d-none  d-sm-block ">{item.DPI_USUARIO}</div>
-                  <div className="col-md-1  d-none  d-sm-block ">{item.TELEFONO_USUARIO}</div>
+                  <div className="col-md-2 col-sm-6 col-xs-2">{item.NOMBRE2}</div>
+                  <div className="col-md-2  d-none  d-sm-block ">{item.APELLIDO1}</div>
+                  <div className="col-md-2  d-none  d-sm-block ">{item.APELLIDO2}</div>
+                  <div className="col-md-1  d-none  d-sm-block ">{item.USUARIO}</div>
                   <div className="col-sm-3 col-xs-3">
                 
-                    {this.props.Access("ModificarUsuarios") && item.ESTADO &&(
+                    {this.props.Access("ModificarUsuarios") &&(
                       <Link
                         to={`${process.env.PUBLIC_URL}/usuarios/modificar/${item.ID_USUARIO}`}
                         className="btn btn-warning"
@@ -167,7 +167,7 @@ else{
                       </Link>
                     )}
 
-                    {this.props.Access("DetallesUsuarios")  && item.ESTADO &&(
+                    {this.props.Access("DetallesUsuarios") &&(
                       <Link
                         to={`${process.env.PUBLIC_URL}/usuarios/detalle/${item.ID_USUARIO}`}
                         className="btn btn-primary m-1"
@@ -176,7 +176,7 @@ else{
                       </Link>
                     )}
 
-                    {this.props.Access("EliminarUsuarios")  && item.ESTADO&& (
+                    {this.props.Access("EliminarUsuarios")  && (
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas eliminar usuario")) {
@@ -189,26 +189,7 @@ else{
                         &times; Eliminar
                       </button>
                     )}
-
-                    {this.props.Access("ReactivarUsuarios")  && !item.ESTADO && (
-                      <button
-                        onClick={() => {
-                          if (window.confirm("Seguro que deseas activar usuario")) {
-                            this.Reactivar(item.ID_USUARIO);
-                          }
-                        }}
-                        type="button"
-                        className="btn btn-danger "
-                      >
-                        &times; Activar
-                      </button>
-                    )}
-
-                   
-
                   </div>
-                  {/* </td> */}
-                  {/* </tr> */}
                 </div>
               );
             })}

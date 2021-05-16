@@ -37,18 +37,18 @@ class UsuarioNuevo extends Component {
   };
 
   validarForm = () => {
-    const {USUARIO_USUARIOR
-      ,CONTRA_USUARIOR,ID_ROLR,NOMBRE_USUARIOR,DIRECCION_USUARIOR,DPI_USUARIOR
-      ,TELEFONO_USUARIOR } = this.state;
-    const noValido = !USUARIO_USUARIOR || !CONTRA_USUARIOR|| !ID_ROLR|| !NOMBRE_USUARIOR|| !DIRECCION_USUARIOR|| !DPI_USUARIOR|| !TELEFONO_USUARIOR;
+    const {USUARIO
+      ,CONTRA_USUARIO,ID_ROL,NOMBRE1,NOMBRE2,APELLIDO1
+      ,APELLIDO2 } = this.state;
+    const noValido = !USUARIO || !CONTRA_USUARIO|| !ID_ROL|| !NOMBRE1|| !NOMBRE2|| !APELLIDO1|| !APELLIDO2;
     return noValido;
   };
 
   CrearUsuario = async (e) => {
     e.preventDefault();
-
+await this.setState({FECHA_DE_CREACION:new Date()})
     const data = await fetchPost(
-      `${process.env.REACT_APP_SERVER}/api/usuario`,
+      `${process.env.REACT_APP_SERVER}/api/usuarios/create`,
       this.state
     );
     this.setState({ data: data.data });
@@ -60,51 +60,18 @@ class UsuarioNuevo extends Component {
 
 
     const data = await fetchGet(
-      `${process.env.REACT_APP_SERVER}/api/roles`
+      `${process.env.REACT_APP_SERVER}/api/roles/all`
     );
     this.setState({ Roles:data.data });
 
 
 
-    const Empresas = await fetchGet(
-      `${process.env.REACT_APP_SERVER}/api/empresa`
-    );
-    this.setState({ Empresas:Empresas.data });
-
-
-// if(!this.props.Access("CambioEmpresa")){
-  const Empresa = await fetchGet(
-    `${process.env.REACT_APP_SERVER}/api/empresa/${this.props.auth[0].ID_EMPRESA}`
-  );
-  this.setState({Empresa:Empresa.data[0],ID_EMPRESAR:Empresa.data[0].ID_EMPRESA });
-
-
-// }/
-
-
-const Estaciones = await fetchGet(
-  `${process.env.REACT_APP_SERVER}/api/estacion`
-);
-this.setState({ Estaciones:Estaciones.data });
-
   }
-
-
-  updateStateSelectEstacion= (Estacion) => {
-    this.setState({Estacion,
-      ID_ESTACION:Estacion.ID_ESTACION,
-    });
-  };
 
 
   updateStateSelectRol = (Rol) => {
     this.setState({Rol,
-      ID_ROLR:Rol.ID_ROL,
-    });
-  };
-  updateStateSelectEmpresa= (Empresa) => {
-    this.setState({Empresa,
-      ID_EMPRESAR:Empresa.ID_EMPRESA,
+      ID_ROL:Rol.ID_ROL,
     });
   };
 
@@ -129,18 +96,18 @@ this.setState({ Estaciones:Estaciones.data });
                 <label>Usuario:</label>
                 <input
                   type="text"
-                  name="USUARIO_USUARIOR"
+                  name="USUARIO"
                   className="form-control"
                   placeholder="Nombre"
                   onChange={this.UpdateState}
-                  defaultValue={this.state.USUARIO_USUARIOR}
+                  defaultValue={this.state.USUARIO}
                 />
               </div>
               <div className="form-group">
                 <label>Contraseña:</label>
                 <input
                   type="password"
-                  name="CONTRA_USUARIOR"
+                  name="CONTRA_USUARIO"
                   className="form-control"
                   placeholder="Descripcion de la acceso"
                   onChange={this.UpdateState}
@@ -170,96 +137,50 @@ this.setState({ Estaciones:Estaciones.data });
               />
               </div>
               <div className="form-group">
-                <label>Estacion:</label>
-                {/* <input
-                  type="text"
-                  name="ID_ROL"
-                  className="form-control"
-                  placeholder="Id Rol"
-                  onChange={this.UpdateState}
-                  defaultValue={this.state.ID_ROL}
-                /> */}
-                <Select
-                onChange={this.updateStateSelectEstacion}
-                options={this.state.Estaciones}
-                isMulti={false}
-                components={makeAnimated()}
-                placeholder={"Seleccione la Estacion"}
-                getOptionLabel={(options) => options.NOMBRE_ESTACON}
-                getOptionValue={(options) => options.ID_ESTACION}
-                value={this.state.Estacion}
-              />
-              </div>
-              <div className="form-group">
-                <label>Nombre Usuario:</label>
+                <label>NOMBRE1:</label>
                 <input
                   type="text"
-                  name="NOMBRE_USUARIOR"
+                  name="NOMBRE1"
                   className="form-control"
                   placeholder="Nombre"
                   onChange={this.UpdateState}
-                  defaultValue={this.state.NOMBRE_USUARIOR}
+                  defaultValue={this.state.NOMBRE1}
                 />
               </div>
-
               <div className="form-group">
-                <label>Direccion Usuario:</label>
+                <label>NOMBRE2:</label>
                 <input
                   type="text"
-                  name="DIRECCION_USUARIOR"
+                  name="NOMBRE2"
                   className="form-control"
-                  placeholder="Direccion"
+                  placeholder="NOMBRE2"
                   onChange={this.UpdateState}
-                  defaultValue={this.state.DIRECCION_USUARIOR}
+                  defaultValue={this.state.NOMBRE2}
                 />
               </div>
-
               <div className="form-group">
-                <label> DPI Usuario:</label>
+                <label>APELLIDO1:</label>
                 <input
                   type="text"
-                  name="DPI_USUARIOR"
+                  name="APELLIDO1"
                   className="form-control"
-                  placeholder="DPI"
+                  placeholder="APELLIDO1"
                   onChange={this.UpdateState}
-                  defaultValue={this.state.DPI_USUARIOR}
+                  defaultValue={this.state.APELLIDO1}
                 />
               </div>
-
               <div className="form-group">
-                <label>Telefono:</label>
+                <label>APELLIDO2:</label>
                 <input
                   type="text"
-                  name="TELEFONO_USUARIOR"
+                  name="APELLIDO2"
                   className="form-control"
-                  placeholder="Telefono"
+                  placeholder="Nombre"
                   onChange={this.UpdateState}
-                  defaultValue={this.state.TELEFONO_USUARIOR}
+                  defaultValue={this.state.APELLIDO2}
                 />
               </div>
-              
-              <div className="form-group">
-                <label>Id Empresa:</label>
-                {/* <input
-                  type="text"
-                  name="ID_EMPRESA"
-                  className="form-control"
-                  placeholder="Id Empresa"
-                  onChange={this.UpdateState}
-                  defaultValue={this.state.ID_EMPRESA}
-                /> */}
-                <Select
-                onChange={this.updateStateSelectEmpresa}
-                options={this.state.Empresas}
-                isMulti={false}
-                isDisabled={!this.props.Access("CambioEmpresa") }
-                components={makeAnimated()}
-                placeholder={"Seleccione el Rol"}
-                getOptionLabel={(options) => options.NOMBRE_EMPRESA}
-                getOptionValue={(options) => options.ID_EMPRESA}
-                value={this.state.Empresa}
-              />
-              </div>
+            
             <button
               disabled={this.validarForm()}
               type="submit"

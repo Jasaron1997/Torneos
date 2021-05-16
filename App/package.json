@@ -29,7 +29,7 @@
     "recharts": "^1.8.5"
   },
   "scripts": {
-    "start": "react-scripts start .env.development.local",
+    "start": "react-scripts start .env.development",
     "start:pro": "PORT=3300 react-scripts start .env.development",
     "build": "react-scripts build .env.production",
     "test": "react-scripts test",

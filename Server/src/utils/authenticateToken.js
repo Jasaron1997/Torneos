@@ -24,10 +24,7 @@ export default  function  authenticateToken(req, res, next) {
       where users.ID_ROL=rol.ID_ROL
       and users.USUARIO='${user.USUARIO}'`, { type: sequelize.QueryTypes.SELECT });
       
-      req.user = user;
-      req.body.USUARIO_USUARIO=userone[0].USUARIO;
-      req.body.ID_USUARIO=userone[0].ID_USUARIO;
-      req.body.ID_ROL=userone[0].ID_ROL;
+      req.user=userone[0];
       next();
     } catch (error) {
       console.log(error);

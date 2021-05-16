@@ -26,7 +26,7 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 .bg-Color-Extra,.nav-link,.navbar-brand,.dropdown-item,.dropdown-menu,.dropdown-divider{
-  background-color: orange !important;
+  background-color: red !important;
   color: white !important;
 }
 

@@ -21,18 +21,18 @@ import jugadoresRoutes from "./routes/jugadores";
 import jugadoresPorEquipoRoutes from "./routes/jugadoresPorEquipo";
 import municipiosRoutes from "./routes/municipios";
 import partidosRoutes from "./routes/partidos";
-import posicionesRoutes from "./routes/posiciones";
-import rolesRoutes from "./routes/roles";
-import torneosRoutes from "./routes/torneos";
-import usuarioRoutes from "./routes/usuario";
+ import posicionesRoutes from "./routes/posiciones";
+ import rolesRoutes from "./routes/roles";
+ import torneosRoutes from "./routes/torneos";
+ import usuarioRoutes from "./routes/usuario";
 
 
 
-// Middlewares
+// // Middlewares
 app.use(morgan("dev"));
 app.use(json());
 
-// Routes
+// // Routes
 app.use("/api/access",accessRoutes);
 app.use("/api/arbitros",arbitrosRoutes);
 app.use("/api/auth",authRoutes);

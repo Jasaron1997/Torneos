@@ -19,7 +19,7 @@ class navbar extends Component {
     return (
       <nav className=" navbar  navbar-expand-lg navbar-dark text-black-50 bg-Color-Extra sticky-top">
         <Link to={`${process.env.PUBLIC_URL}/`} className="navbar-brand">
-          Smart Gas
+          Torneos
         </Link>
         <button
           className="navbar-toggler"
@@ -69,38 +69,12 @@ class navbar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton"
                   >
-                    {/* {this.props.Access("VerTiposDeClientes") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/acceso`}
-                        className="dropdown-item"
-                      >
-                      Acceso
-                      </Link>
-                    {/* )} */}
-                  {/* {this.props.Access("VerTiposDeClientes") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/roles`}
-                        className="dropdown-item"
-                      >
-                      Roles
-                      </Link>
-                    {/* )} */}
-
-                    {/* {this.props.Access("VerTiposDeClientes") && ( */}
                       <Link
                         to={`${process.env.PUBLIC_URL}/usuarios`}
                         className="dropdown-item"
                       >
                       Usuarios
                       </Link>
-
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/usuarios/CambioContra`}
-                        className="dropdown-item"
-                      >
-                      Cambiar Contraseña
-                      </Link>
-                    {/* )} */}
                   </div>
                 </div>
               </li>
@@ -120,76 +94,12 @@ class navbar extends Component {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
-                    {/* {this.props.Access("VerTiposDeClientes") && ( */}
                       <Link
-                        to={`${process.env.PUBLIC_URL}/combustible`}
+                        to={`${process.env.PUBLIC_URL}/arbitros`}
                         className="dropdown-item"
                       >
-                      Combustible
+                      arbitros
                       </Link>
-                    {/* )} */}
-                    {/* {this.props.Access("VerRoles") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/estacion`}
-                        className="dropdown-item"
-                      >
-                        Estaciones
-                      </Link>
-                    {/* )} */}
-
-
-                    {/* <div className="dropdown-divider" /> */}
-        
-                    {/* <div className="dropdown-divider" /> */}
-                    {/* {this.props.Access("VerAccesos") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/pilotos`}
-                        className="dropdown-item"
-                      >
-                       Pilotos
-                      </Link>
-                    {/* )} */}
-                    {/* {this.props.Access("VerAccesos") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/unidad`}
-                        className="dropdown-item"
-                      >
-                       Unidades
-                      </Link>
-                    {/* )} */}
-                    {/* {this.props.Access("VerAccesos") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/tipounidad`}
-                        className="dropdown-item"
-                      >
-                       Tipo Unidad
-                      </Link>
-                    {/* )} */}
-                    {/* {this.props.Access("VerAccesos") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/empresa`}
-                        className="dropdown-item"
-                      >
-                       Empresa
-                      </Link>
-                    {/* )} */}
-
-                      {/* {this.props.Access("Tarjetas") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/tarjeta`}
-                        className="dropdown-item"
-                      >
-                       Tarjeta
-                      </Link>
-                    {/* )} */}
-                    {/* {this.props.Access("Tarjetas") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/PrecioDia`}
-                        className="dropdown-item"
-                      >
-                       Precio Combustible Dia
-                      </Link>
-                    {/* )} */}
                   </div>
                 </div>
               
@@ -204,7 +114,7 @@ class navbar extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    Operaciones
+                    Torneos
                   </button>
                   <div 
                     className="dropdown-menu"
@@ -212,62 +122,10 @@ class navbar extends Component {
                   >
                     {/* {this.props.Access("VerTiposDeClientes") && ( */}
                       <Link
-                        to={`${process.env.PUBLIC_URL}/asingtarjeta`}
+                        to={`${process.env.PUBLIC_URL}/Torneos`}
                         className="dropdown-item"
                       >
-                       Asignacion de Tarjetas
-                      </Link>
-                     
-                    {/* )} */}
-                    {/* {this.props.Access("VerTiposDeClientes") && ( */}
-                      {/* <Link
-                        to={`${process.env.PUBLIC_URL}/inicio`}
-                        className="dropdown-item"
-                      >
-                       Entrega de Tarjetas
-                      </Link> */}
-                    {/* )} */}
-                    {/* {this.props.Access("VerRoles") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Autorizacion`}
-                        className="dropdown-item"
-                      >
-                        Autorizaciones
-                      </Link>
-
-                
-                    {/* )} */}
-                    {/* <div className="dropdown-divider" /> */}
-
-                    {/* {this.props.Access("VerAccesos") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/AsignacionCombustible`}
-                        className="dropdown-item"
-                      >
-                        Asignacion Combustible
-                      </Link>
-                    {/* )} */}
-
-                    {/* {this.props.Access("VerAccesos") && ( */}
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/ConsumoCombustible`}
-                        className="dropdown-item"
-                      >
-                        Despacho Combustible
-                      </Link>
-                    {/* )} */}
-
-                    <Link
-                        to={`${process.env.PUBLIC_URL}/asingtarjetaPivote`}
-                        className="dropdown-item newitem"
-                      >
-                       Asignacion de Tarjetas Comodin
-                      </Link>
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/AutorizacionPivote`}
-                        className="dropdown-item newitem"
-                      >
-                        Autorizaciones Comodin
+                       Torneos
                       </Link>
                   </div>
                 </div>
@@ -283,72 +141,25 @@ class navbar extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    Reportes
+                    Equipos
                   </button>
                   <div 
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton3"
                   >
-                    {/* {this.props.Access("VerTiposDeClientes") && ( */}
                       <Link
-                        to={`${process.env.PUBLIC_URL}/Reporte_Uno`}
+                        to={`${process.env.PUBLIC_URL}/Equipos`}
                         className="dropdown-item"
                       >
-                       Descargar Reporte
+                      Equipos
                       </Link>
-                      
-                    {/* )} */}
-                    <Link
-                        to={`${process.env.PUBLIC_URL}/Reporte_Dos`}
-                        className="dropdown-item"
-                      >
-                       Descargar Reporte por Estacion
-                      </Link>
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Reporte_Tres`}
-                        className="dropdown-item"
-                      >
-                       Descargar Reporte por Empresa
-                      </Link>
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Reporte_Cuatro`}
-                        className="dropdown-item"
-                      >
-                       Descargar Reporte por Empresa y Estacion
-                      </Link>
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/ReportePagos`}
-                        className="dropdown-item"
-                      >
-                       Reportes de Pagos Faltantes
-                      </Link>
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/ReportePagosListo`}
-                        className="dropdown-item"
-                      >
-                       Reportes de Pagos
-                      </Link>
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/ReportePagosListoDos`}
-                        className="dropdown-item"
-                      >
-                       Reportes de Pago
-                      </Link>
-                      
+                    
                   </div>
                 </div>
                 
               </li>
               </Fragment>
           )}
-          <li className="nav-item ">
-                  <Link
-                    to={`${process.env.PUBLIC_URL}/estadistica`}
-                    className="nav-link"
-                  >
-                    Estaditicas
-                  </Link>
-                </li>
           </ul>
         </div>
       </nav>

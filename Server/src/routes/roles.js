@@ -4,9 +4,9 @@ import authenticateToken from '../utils/authenticateToken';
 
 
 // Controllers
-import {Create,Update,Delete,All,Find} from '../controllers/usuario.controller';
-// Routes
-router.post('/Create',authenticateToken, Create);
+ import {Create,Update,Delete,All,Find} from '../controllers/roles.controller';
+// // Routes
+ router.post('/Create',authenticateToken, Create);
 router.get('/All',authenticateToken, All);
 router.post('/Delete',authenticateToken, Delete);
 router.put('/Update',authenticateToken, Update);
