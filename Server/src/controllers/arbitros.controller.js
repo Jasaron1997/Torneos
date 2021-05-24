@@ -1,7 +1,11 @@
 const { sequelize } = require("../database/database");
 export async function All(req, res) {
   try {
-    const datos = await sequelize.query(`select* from  ARBITROS   `, {
+    const datos = await sequelize.query(`select AR.*,DEP.NOMBRE DEPARTAMENTO,MUN.NOMBRE MUNICIPIO from  ARBITROS AR 
+    inner join departamentos dep on dep.ID_DEPARTAMENTO=AR.ID_DEPARTAMENTO
+    inner join MUNICIPIOS MUN on MUN.ID_MUNICIPIO=AR.ID_MUNICIPIO
+    
+    `, {
       replacements: {},
       type: sequelize.QueryTypes.SELECT,
     });

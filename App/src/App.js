@@ -157,6 +157,12 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/usuarios/modificar/:id`} render={() => <UsuarioEditar modificar={true} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/usuarios/CambioContra`} render={() => <CambioContra modificar={true} Access={this.Access} auth={this.state.auth}/>} />
 
+{/* arbitros  */}
+<Route exact path={`${process.env.PUBLIC_URL}/arbitros`} render={() => <Arbitros Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/arbitros/crear`} render={() => <ArbitrosNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/arbitros/detalle/:id`} render={() => <ArbitrosEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/arbitros/modificar/:id`} render={() => <ArbitrosEditar modificar={true} Access={this.Access}/>} />
+
          </Switch>
         </header>
       </Router>
