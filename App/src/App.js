@@ -163,6 +163,12 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/detalle/:id`} render={() => <ArbitrosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/modificar/:id`} render={() => <ArbitrosEditar modificar={true} Access={this.Access}/>} />
 
+{/* arbitros  */}
+<Route exact path={`${process.env.PUBLIC_URL}/entrenadores`} render={() => <Entrenadores Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/crear`} render={() => <EntrenadoresNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/detalle/:id`} render={() => <EntrenadoresEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/modificar/:id`} render={() => <EntrenadoresEditar modificar={true} Access={this.Access}/>} />
+
          </Switch>
         </header>
       </Router>

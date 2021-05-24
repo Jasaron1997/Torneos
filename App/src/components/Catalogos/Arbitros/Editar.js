@@ -114,7 +114,7 @@ import makeAnimated from "react-select/animated";
           <div className="row justify-content-center">
             <form
               className="col-md-8 col-sm-12"
-              onSubmit={(e) => this.RolEditar(e)}
+              onSubmit={(e) => this.Editar(e)}
             >
               <div className="form-group">
                 <label>NOMBRE1:</label>
