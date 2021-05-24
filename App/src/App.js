@@ -163,6 +163,11 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/detalle/:id`} render={() => <ArbitrosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/modificar/:id`} render={() => <ArbitrosEditar modificar={true} Access={this.Access}/>} />
 
+{/* BLOQUES  */}
+<Route exact path={`${process.env.PUBLIC_URL}/bloques`} render={() => <Bloques Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/bloques/crear`} render={() => <BloquesNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/bloques/detalle/:id`} render={() => <BloquesEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/bloques/modificar/:id`} render={() => <BloquesEditar modificar={true} Access={this.Access}/>} />
          </Switch>
         </header>
       </Router>

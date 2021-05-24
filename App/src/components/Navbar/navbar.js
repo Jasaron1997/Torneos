@@ -100,6 +100,12 @@ class navbar extends Component {
                       >
                       arbitros
                       </Link>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/bloques`}
+                        className="dropdown-item"
+                      >
+                      Bloques
+                      </Link>
                   </div>
                 </div>
               
