@@ -169,6 +169,11 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/crear`} render={() => <EntrenadoresNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/detalle/:id`} render={() => <EntrenadoresEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/modificar/:id`} render={() => <EntrenadoresEditar modificar={true} Access={this.Access}/>} />
+          {/* JUGADORES  */}
+<Route exact path={`${process.env.PUBLIC_URL}/JUGADORES`} render={() => <Jugadores Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/JUGADORES/crear`} render={() => <JugadoresNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/JUGADORES/detalle/:id`} render={() => <JugadoresEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/JUGADORES/modificar/:id`} render={() => <JugadoresEditar modificar={true} Access={this.Access}/>} />
 {/* municipios  */}
 <Route exact path={`${process.env.PUBLIC_URL}/municipios`} render={() => <Municipios Access={this.Access}/>} />
 {/* Departamentos  */}

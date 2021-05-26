@@ -113,6 +113,12 @@ class navbar extends Component {
                       entrenadores
                       </Link>
                       <Link
+                        to={`${process.env.PUBLIC_URL}/JUGADORES`}
+                        className="dropdown-item"
+                      >
+                      Jugadores
+                      </Link>
+                      <Link
                         to={`${process.env.PUBLIC_URL}/MUNICIPIOS`}
                         className="dropdown-item"
                       >
