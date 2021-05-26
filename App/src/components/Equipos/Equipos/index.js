@@ -85,7 +85,7 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
 };
 
   render() {
-    const redireccion = this.props.Access("VerRoles") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />

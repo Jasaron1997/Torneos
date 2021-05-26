@@ -75,6 +75,12 @@ class navbar extends Component {
                       >
                       Usuarios
                       </Link>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/roles`}
+                        className="dropdown-item"
+                      >
+                      roles
+                      </Link>
                   </div>
                 </div>
               </li>
@@ -117,6 +123,12 @@ class navbar extends Component {
                         className="dropdown-item"
                       >
                       Jugadores
+                      </Link>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/Posiciones`}
+                        className="dropdown-item"
+                      >
+                      Posiciones
                       </Link>
                       <Link
                         to={`${process.env.PUBLIC_URL}/MUNICIPIOS`}

@@ -64,7 +64,7 @@ await this.setState({...estadoInicial})
 
 
   render() {
-    const redireccion = this.props.Access("VerRoles") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />
@@ -139,7 +139,7 @@ await this.setState({...estadoInicial})
                     {this.props.Access("EliminarRoles")  &&(
                       <button
                         onClick={() => {
-                          if (window.confirm("Seguro que deseas el arbitro")) {
+                          if (window.confirm("Seguro que deseas eliminar al jugador")) {
                             this.Eliminar(item);
                           }
                         }}

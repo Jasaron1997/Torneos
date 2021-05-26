@@ -1,7 +1,10 @@
 const { sequelize } = require("../database/database");
 export async function All(req, res) {
   try {
-    const datos = await sequelize.query(`select* from  TORNEOS   `, {
+    const datos = await sequelize.query(`
+    select AR.*,DEP.NOMBRE DEPARTAMENTO,MUN.NOMBRE MUNICIPIO from  TORNEOS AR 
+    inner join departamentos dep on dep.ID_DEPARTAMENTO=AR.ID_DEPARTAMENTO
+    inner join MUNICIPIOS MUN on MUN.ID_MUNICIPIO=AR.ID_MUNICIPIO`, {
       replacements: {},
       type: sequelize.QueryTypes.SELECT,
     });
@@ -39,17 +42,23 @@ export async function Find(req, res) {
   }
 }
 export async function Create(req, res) {
-  const { FECHA_DE_CREACION, ID_USUARIO, ID_MUNICIPIO, ID_DEPARTAMENTO } =
-    req.body;
+  const {
+    FECHA_DE_CREACION,
+    ID_USUARIO,
+    ID_MUNICIPIO,
+    ID_DEPARTAMENTO,
+    NOMBRE,
+  } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC INSERTAR_TORNEOS  @FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_USUARIO=:ID_USUARIO,@ID_MUNICIPIO=:ID_MUNICIPIO,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO                                              `,
+      `EXEC INSERTAR_TORNEOS  @FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_USUARIO=:ID_USUARIO,@ID_MUNICIPIO=:ID_MUNICIPIO,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO,@NOMBRE=:NOMBRE                                              `,
       {
         replacements: {
           FECHA_DE_CREACION,
           ID_USUARIO,
           ID_MUNICIPIO,
           ID_DEPARTAMENTO,
+          NOMBRE,
         },
         type: sequelize.QueryTypes.SELECT,
       }
@@ -77,10 +86,11 @@ export async function Update(req, res) {
     ID_USUARIO,
     ID_MUNICIPIO,
     ID_DEPARTAMENTO,
+    NOMBRE,
   } = req.body;
   try {
     const datos = await sequelize.query(
-      `EXEC ACTUALIZAR_TORNEOS  @ID_TORNEO=:ID_TORNEO,@FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_USUARIO=:ID_USUARIO,@ID_MUNICIPIO=:ID_MUNICIPIO,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO                                              `,
+      `EXEC ACTUALIZAR_TORNEOS  @ID_TORNEO=:ID_TORNEO,@FECHA_DE_CREACION=:FECHA_DE_CREACION,@ID_USUARIO=:ID_USUARIO,@ID_MUNICIPIO=:ID_MUNICIPIO,@ID_DEPARTAMENTO=:ID_DEPARTAMENTO,@NOMBRE=:NOMBRE                                              `,
       {
         replacements: {
           ID_TORNEO,
@@ -88,6 +98,7 @@ export async function Update(req, res) {
           ID_USUARIO,
           ID_MUNICIPIO,
           ID_DEPARTAMENTO,
+          NOMBRE,
         },
         type: sequelize.QueryTypes.SELECT,
       }

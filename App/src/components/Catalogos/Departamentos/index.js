@@ -64,7 +64,7 @@ await this.setState({...estadoInicial})
 
 
   render() {
-    const redireccion = this.props.Access("VerRoles") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />

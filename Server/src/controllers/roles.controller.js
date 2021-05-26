@@ -41,6 +41,7 @@ export async function Find(req, res) {
 export async function Create(req, res) {
   const { NOMBRE_ROL, FECHA_CREACION, ID_USUARIO, NIVEL_AUTORIZACION } =
     req.body;
+    console.log(req.body)
   try {
     const datos = await sequelize.query(
       `EXEC INSERTAR_ROLES  @NOMBRE_ROL=:NOMBRE_ROL,@FECHA_CREACION=:FECHA_CREACION,@ID_USUARIO=:ID_USUARIO,@NIVEL_AUTORIZACION=:NIVEL_AUTORIZACION                                              `,

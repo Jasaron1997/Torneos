@@ -139,7 +139,7 @@ await this.setState({...estadoInicial})
                     {this.props.Access("EliminarRoles")  &&(
                       <button
                         onClick={() => {
-                          if (window.confirm("Seguro que deseas el arbitro")) {
+                          if (window.confirm("Seguro que deseas eliminar el  arbitro")) {
                             this.Eliminar(item);
                           }
                         }}

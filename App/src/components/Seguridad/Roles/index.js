@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { fetchGet,fetchDelete} from "../../../utils/Fetch";
+import { fetchGet,fetchDelete, fetchPost} from "../../../utils/Fetch";
 import { Link, Redirect } from "react-router-dom";
 
 const estadoInicial = { BuscarDatos: "", data: null };
@@ -11,7 +11,7 @@ class Rol extends Component {
   }
 
   Buscar = async () =>{
-    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/roles`);
+    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/roles/all`);
     this.setState({ dataFiltrada: data.data, data: data.data,estado:"Re Activar"});
   }
 
@@ -46,46 +46,22 @@ cambioEstado = (e) => {
 
 
 
-Eliminar = async (ID_ROL) => {
-  const data = await fetchDelete(
-    `${process.env.REACT_APP_SERVER}/api/roles/${ID_ROL}/${false}`
+Eliminar = async (item) => {
+
+  await this.setState({...item})
+  const data = await fetchPost(
+    `${process.env.REACT_APP_SERVER}/api/roles/delete/`,this.state
   );
   alert(data.message);
   const dataGet = await fetchGet(
-    `${process.env.REACT_APP_SERVER}/api/roles`
+    `${process.env.REACT_APP_SERVER}/api/roles/all`
   );
   this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
 };
 
 
-ActivoReactivo =  (e) => {
-  e.preventDefault();
-  console.log(this.state.estado,"Re Activar")
-if(this.state.estado==="Re Activar")
-{
-this.Inactivos();
-}
-else{
-this.Buscar();
-}
-};
-
-
-Reactivar = async (ID_ROL) => {
-  const data = await fetchDelete(
-    `${process.env.REACT_APP_SERVER}/api/roles/${ID_ROL}/${true}`
-  );
-  alert(data.message);
- this.Inactivos();
-};
-
-Inactivos = async () => {
-const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/roles/inactivo`);
-this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
-};
-
   render() {
-    const redireccion = this.props.Access("VerRoles") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />
@@ -136,7 +112,7 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
           <div className="ml-5 mr-5">
             <div className="row border">
               <div className="col-sm-4 col-xs-4">NOMBRE</div>
-              <div className="col-sm-4 col-xs-4 d-none d-sm-block">DESCRIPCION</div>
+              <div className="col-sm-4 col-xs-4 d-none d-sm-block">NIVEL_AUTORIZACION</div>
               <div className="col-sm-4 col-xs-4">OPCIONES</div>
             </div>
             {this.state.dataFiltrada.map((item) => {
@@ -144,10 +120,10 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
               return (
                 <div className="row border" key={ID_ROL}>
                   <div className="col-sm-4 col-xs-4">{item.NOMBRE_ROL}</div>
-                  <div className="col-sm-4 col-xs-4 d-none d-sm-block">{item.DESCRIPCION_ROL}</div>    
+                  <div className="col-sm-4 col-xs-4 d-none d-sm-block">{item.NIVEL_AUTORIZACION}</div>    
                   <div className="col-sm-4 col-xs-4">
                 
-                    {this.props.Access("ModificarRoles")  && item.ESTADO && (
+                    {this.props.Access("ModificarRoles")  &&  (
                       <Link
                         to={`${process.env.PUBLIC_URL}/roles/modificar/${item.ID_ROL}`}
                         className="btn btn-warning m-1"
@@ -156,7 +132,7 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
                       </Link>
                     )}
 
-                    {this.props.Access("DetallesRoles")  && item.ESTADO && (
+                    {this.props.Access("DetallesRoles")  && (
                       <Link
                         to={`${process.env.PUBLIC_URL}/roles/detalle/${item.ID_ROL}`}
                         className="btn btn-primary m-1"
@@ -164,11 +140,11 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
                         Detalles
                       </Link>
                     )}
-                    {this.props.Access("EliminarRoles")  && item.ESTADO&& (
+                    {this.props.Access("EliminarRoles")  && (
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas el rol")) {
-                            this.Eliminar(item.ID_ROL);
+                            this.Eliminar(item);
                           }
                         }}
                         type="button"
@@ -177,27 +153,6 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
                         &times; Eliminar
                       </button>
                     )}
-                  {this.props.Access("ReactivarRoles")  && (item.ESTADO===false) && (
-                      <button
-                        onClick={() => {
-                          if (window.confirm("Seguro que deseas el role")) {
-                            this.Reactivar(item.ID_ROL);
-                          }
-                        }}
-                        type="button"
-                        className="btn btn-danger m-1 "
-                      >
-                        &times; Activar
-                      </button>
-                    )}
-                    {this.props.Access("VerAsingar") &&   (
-                        <Link
-                          to={`${process.env.PUBLIC_URL}/asing/${item.ID_ROL}`}
-                          className="btn btn-warning m-1"
-                        >
-                          Asign. Accesos
-                        </Link>
-                      )}
                   </div>
                   {/* </td> */}
                   {/* </tr> */}

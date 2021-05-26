@@ -6,7 +6,7 @@
   const initialState = {
     ID_ROL:""
     ,NOMBRE_ROL:""
-    ,DESCRIPCION_ROL:""  ,ESTADO:true
+    ,NIVEL_AUTORIZACION:""  ,ESTADO:true
   };
   
   class RolEditar extends Component {
@@ -28,8 +28,8 @@
     };
   
     validarForm = () => {
-      const {NOMBRE_ROL,DESCRIPCION_ROL} = this.state;
-      const noValido = !NOMBRE_ROL|| ! DESCRIPCION_ROL;
+      const {NOMBRE_ROL,NIVEL_AUTORIZACION} = this.state;
+      const noValido = !NOMBRE_ROL|| ! NIVEL_AUTORIZACION;
       return noValido;
     };
     
@@ -37,16 +37,16 @@
     const { id } = this.props.match.params;
 
     const data = await fetchGet(
-      `${process.env.REACT_APP_SERVER}/api/roles/${id}`
+      `${process.env.REACT_APP_SERVER}/api/roles/find/${id}`
     );
-    this.setState({ ...data.data[0] });
+    this.setState({ ...data.data});
   }
   
     RolEditar = async (e) => {
       e.preventDefault();
   
       const data = await fetchPut(
-        `${process.env.REACT_APP_SERVER}/api/roles/${this.state.ID_ROL}`,
+        `${process.env.REACT_APP_SERVER}/api/roles/update`,
         this.state
       );
       this.setState({ data: data.data });
@@ -55,7 +55,7 @@
     };
   
     render() {
-      const redireccion = this.props.Access("ModificarRoles") ? (
+      const redireccion = this.props.Access("1") ? (
         ""
       ) : (
         <Redirect to="/login" />
@@ -91,14 +91,14 @@
               </div>
   
               <div className="form-group">
-                <label>Descripcion:</label>
+                <label>NIVEL AUTORIZACION:</label>
                 <input
-                  type="text"
-                  name="DESCRIPCION_ROL"
+                  type="number"
+                  name="NIVEL_AUTORIZACION"
                   className="form-control"
-                  placeholder="Descripcion Rol"
+                  placeholder="NIVEL AUTORIZACION"
                   onChange={this.UpdateState}
-                  defaultValue={this.state.DESCRIPCION_ROL}
+                  defaultValue={this.state.NIVEL_AUTORIZACION}
                   readOnly={!this.props.modificar} 
                 />
               </div>

@@ -5,7 +5,7 @@ import { withRouter, Redirect } from "react-router-dom";
 const initialState = {
   ID_ROL:""
   ,NOMBRE_ROL:""
-  ,DESCRIPCION_ROL:""
+  ,NIVEL_AUTORIZACION:""
   ,ESTADO:true
 };
 
@@ -28,16 +28,20 @@ class RolNuevo extends Component {
   };
 
   validarForm = () => {
-    const {NOMBRE_ROL,DESCRIPCION_ROL} = this.state;
-    const noValido = !NOMBRE_ROL|| ! DESCRIPCION_ROL;
+    const {NOMBRE_ROL,NIVEL_AUTORIZACION} = this.state;
+    const noValido = !NOMBRE_ROL|| ! NIVEL_AUTORIZACION;
     return noValido;
   };
 
   CrearRol = async (e) => {
     e.preventDefault();
-
+    await this.setState({
+      ID_USUARIO:this.props.auth[0].ID_USUARIO,
+      
+      FECHA_CREACION:new Date()
+      })
     const data = await fetchPost(
-      `${process.env.REACT_APP_SERVER}/api/roles`,
+      `${process.env.REACT_APP_SERVER}/api/roles/create`,
       this.state
     );
     this.setState({ data: data.data });
@@ -46,7 +50,7 @@ class RolNuevo extends Component {
   };
 
   render() {
-    const redireccion = this.props.Access("CrearRoles") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />
@@ -75,14 +79,14 @@ class RolNuevo extends Component {
             </div>
 
             <div className="form-group">
-              <label>Descripcion:</label>
+              <label>NIVEL_AUTORIZACION:</label>
               <input
-                type="text"
-                name="DESCRIPCION_ROL"
+                type="number"
+                name="NIVEL_AUTORIZACION"
                 className="form-control"
-                placeholder="Descripcion"
+                placeholder="NIVEL_AUTORIZACION"
                 onChange={this.UpdateState}
-                defaultValue={this.state.DESCRIPCION_ROL}
+                defaultValue={this.state.NIVEL_AUTORIZACION}
               />
             </div>
 
