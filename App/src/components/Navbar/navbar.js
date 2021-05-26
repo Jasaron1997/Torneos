@@ -100,24 +100,32 @@ class navbar extends Component {
                       >
                       arbitros
                       </Link>
-<<<<<<< HEAD
                       <Link
                         to={`${process.env.PUBLIC_URL}/bloques`}
                         className="dropdown-item"
                       >
                       Bloques
-=======
-
+                      </Link>
                       <Link
                         to={`${process.env.PUBLIC_URL}/entrenadores`}
                         className="dropdown-item"
                       >
                       entrenadores
->>>>>>> 39144af8a312ca5a417cf52460d0f08583745f3f
                       </Link>
-                  </div>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/MUNICIPIOS`}
+                        className="dropdown-item"
+                      >
+                      Municipios
+                      </Link>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/Departamentos`}
+                        className="dropdown-item"
+                      >
+                      Departamentos
+                      </Link>
                 </div>
-              
+                </div>
               </li>
               <li className="nav-item dropdown">
                 <div className="dropdown">

@@ -36,8 +36,6 @@ import Bloques from "./components/Catalogos/Bloques";
 import BloquesEditar from "./components/Catalogos/Bloques/Editar";
 import BloquesNuevo from "./components/Catalogos/Bloques/Nuevo";
 import Departamentos from "./components/Catalogos/Departamentos";
-import DepartamentosEditar from "./components/Catalogos/Departamentos/Editar";
-import DepartamentosNuevo from "./components/Catalogos/Departamentos/Nuevo";
 import Entrenadores from "./components/Catalogos/Entrenadores";
 import EntrenadoresEditar from "./components/Catalogos/Entrenadores/Editar";
 import EntrenadoresNuevo from "./components/Catalogos/Entrenadores/Nuevo";
@@ -45,8 +43,6 @@ import Jugadores from "./components/Catalogos/Jugadores";
 import JugadoresEditar from "./components/Catalogos/Jugadores/Editar";
 import JugadoresNuevo from "./components/Catalogos/Jugadores/Nuevo";
 import Municipios from "./components/Catalogos/Municipios";
-import MunicipiosEditar from "./components/Catalogos/Municipios/Editar";
-import MunicipiosNuevo from "./components/Catalogos/Municipios/Nuevo";
 
 //equipos
 import Equipos from "./components/Equipos/Equipos";
@@ -114,7 +110,7 @@ return true;
   };
 
   auth = (auth) => {
-    auth[0].NOMBRE_COMPLETO=auth[0].NOMBRE1+" "+auth[0].NOMBRE2+" "+auth[0].APELLIDO1+" "+auth[0].APELLIDO2
+    if(auth && auth[0])  auth[0].NOMBRE_COMPLETO=auth[0].NOMBRE1+" "+auth[0].NOMBRE2+" "+auth[0].APELLIDO1+" "+auth[0].APELLIDO2
     
     this.setState({
       auth,
@@ -163,20 +159,20 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/detalle/:id`} render={() => <ArbitrosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/modificar/:id`} render={() => <ArbitrosEditar modificar={true} Access={this.Access}/>} />
 
-<<<<<<< HEAD
 {/* BLOQUES  */}
 <Route exact path={`${process.env.PUBLIC_URL}/bloques`} render={() => <Bloques Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/crear`} render={() => <BloquesNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/detalle/:id`} render={() => <BloquesEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/modificar/:id`} render={() => <BloquesEditar modificar={true} Access={this.Access}/>} />
-=======
-{/* arbitros  */}
+{/* entrenadores  */}
 <Route exact path={`${process.env.PUBLIC_URL}/entrenadores`} render={() => <Entrenadores Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/crear`} render={() => <EntrenadoresNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/detalle/:id`} render={() => <EntrenadoresEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/modificar/:id`} render={() => <EntrenadoresEditar modificar={true} Access={this.Access}/>} />
-
->>>>>>> 39144af8a312ca5a417cf52460d0f08583745f3f
+{/* municipios  */}
+<Route exact path={`${process.env.PUBLIC_URL}/municipios`} render={() => <Municipios Access={this.Access}/>} />
+{/* Departamentos  */}
+<Route exact path={`${process.env.PUBLIC_URL}/Departamentos`} render={() => <Departamentos Access={this.Access}/>} />
          </Switch>
         </header>
       </Router>
