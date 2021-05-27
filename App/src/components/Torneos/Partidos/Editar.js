@@ -42,22 +42,23 @@ import makeAnimated from "react-select/animated";
           ID_VISITANTE:Visitante.ID_EQUIPO,
           });
         };
-        updateStateArbitro1 = async(Arbitro) => {
-          await  this.setState({Arbitro,
-            ID_ARBITRO1:Arbitro.ID_ARBITRO,
+        updateStateArbitro1 = async(Arbitro1) => {
+          await  this.setState({Arbitro1,
+            ID_ARBITRO1:Arbitro1.ID_ARBITRO,
             });
           };
-          updateStateArbitro2 = async(Arbitro) => {
-            await  this.setState({Arbitro,
-              ID_ARBITRO2:Arbitro.ID_ARBITRO,
+          updateStateArbitro2 = async(Arbitro2) => {
+            await  this.setState({Arbitro2,
+              ID_ARBITRO2:Arbitro2.ID_ARBITRO,
               });
             };
-
-            updateStateArbitro3 = async(Arbitro) => {
-              await  this.setState({Arbitro,
-                ID_ARBITRO3:Arbitro.ID_ARBITRO,
+  
+            updateStateArbitro3 = async(Arbitro3) => {
+              await  this.setState({Arbitro3,
+                ID_ARBITRO3:Arbitro3.ID_ARBITRO,
                 });
               };
+  
 
         
         
@@ -82,7 +83,7 @@ import makeAnimated from "react-select/animated";
  await this.setState({ Arbitros1:Arbitros.data,Arbitros2:Arbitros.data,Arbitros3:Arbitros.data });
 
     
-
+debugger
  const Local=this.state.Locales.find(x=>x.ID_EQUIPO==this.state.ID_LOCAL)
  await this.setState({ Local:Local });
  const Visitante=this.state.Visitantes.find(x=>x.ID_EQUIPO==this.state.ID_VISITANTE)

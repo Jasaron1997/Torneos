@@ -24,7 +24,18 @@ export async function All(req, res) {
 export async function ByBloques(req, res) {
   try {
   const { ID } = req.params;
-    const datos = await sequelize.query(`select* from  PARTIDOS where ID_BLOQUE=${ID}   `, {
+    const datos = await sequelize.query(`select par.*,BLO.NOMBRE BLOQUE,locall.NOMBRE LOCAL, visitante.NOMBRE VISITANTE,
+    ARBITRO1.NOMBRE_COMPLETO ARBITRO1,
+    ARBITRO2.NOMBRE_COMPLETO ARBITRO2,
+    ARBITRO3.NOMBRE_COMPLETO ARBITRO3
+    from partidos par
+    inner join EQUIPOS locall on locall.ID_EQUIPO=par.ID_LOCAL
+    inner join EQUIPOS visitante on visitante.ID_EQUIPO=par.ID_VISITANTE
+    left join BLOQUES blo on blo.ID_BLOQUE=par.ID_BLOQUE
+    left join ARBITROS ARBITRO1 on ARBITRO1.ID_ARBITRO=par.ID_ARBITRO1
+    left join ARBITROS ARBITRO2 on ARBITRO2.ID_ARBITRO=par.ID_ARBITRO2
+    left join ARBITROS ARBITRO3 on ARBITRO3.ID_ARBITRO=par.ID_ARBITRO3
+     where par.ID_BLOQUE=${ID}   `, {
       replacements: {},
       type: sequelize.QueryTypes.SELECT,
     });

@@ -59,20 +59,20 @@ FECHA_DE_CREACION:new Date()
         ID_VISITANTE:Visitante.ID_EQUIPO,
         });
       };
-      updateStateArbitro1 = async(Arbitro) => {
-        await  this.setState({Arbitro,
-          ID_ARBITRO1:Arbitro.ID_ARBITRO,
+      updateStateArbitro1 = async(Arbitro1) => {
+        await  this.setState({Arbitro1,
+          ID_ARBITRO1:Arbitro1.ID_ARBITRO,
           });
         };
-        updateStateArbitro2 = async(Arbitro) => {
-          await  this.setState({Arbitro,
-            ID_ARBITRO2:Arbitro.ID_ARBITRO,
+        updateStateArbitro2 = async(Arbitro2) => {
+          await  this.setState({Arbitro2,
+            ID_ARBITRO2:Arbitro2.ID_ARBITRO,
             });
           };
 
-          updateStateArbitro3 = async(Arbitro) => {
-            await  this.setState({Arbitro,
-              ID_ARBITRO3:Arbitro.ID_ARBITRO,
+          updateStateArbitro3 = async(Arbitro3) => {
+            await  this.setState({Arbitro3,
+              ID_ARBITRO3:Arbitro3.ID_ARBITRO,
               });
             };
 
