@@ -4,11 +4,10 @@ import authenticateToken from '../utils/authenticateToken';
 
 
 // Controllers
-import {Create,Update,Delete,All,Find,ByTorneso} from '../controllers/bloques.controller';
+import {Create,Update,Delete,All,Find} from '../controllers/equipos.controller';
 // Routes
 router.post('/Create',authenticateToken, Create);
 router.get('/All',authenticateToken, All);
-router.get('/ByTorneos/:ID',authenticateToken, ByTorneso);
 router.post('/Delete',authenticateToken, Delete);
 router.put('/Update',authenticateToken, Update);
 router.get('/FIND/:ID',authenticateToken, Find);

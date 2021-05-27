@@ -18,6 +18,7 @@ import bloquesRoutes from "./routes/bloques";
 import departamentosRoutes from "./routes/departamentos";
 import entrenadoresRoutes from "./routes/entrenadores";
 import jugadoresRoutes from "./routes/jugadores";
+import equiposRoutes from "./routes/equipos";
 import jugadoresPorEquipoRoutes from "./routes/jugadoresPorEquipo";
 import municipiosRoutes from "./routes/municipios";
 import partidosRoutes from "./routes/partidos";
@@ -48,6 +49,7 @@ app.use("/api/posiciones",posicionesRoutes);
 app.use("/api/roles",rolesRoutes);
 app.use("/api/torneos",torneosRoutes);
 app.use("/api/usuarios",usuarioRoutes);
+app.use("/api/equipos",equiposRoutes);
 
 
 

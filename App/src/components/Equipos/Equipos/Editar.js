@@ -55,7 +55,7 @@
     };
   
     render() {
-      const redireccion = this.props.Access("ModificarRoles") ? (
+      const redireccion = this.props.Access("1") ? (
         ""
       ) : (
         <Redirect to="/login" />

@@ -30,8 +30,8 @@ class Nuevo extends Component {
   };
 
   validarForm = () => {
-    const { NOMBRE, Torneo} = this.state;
-    const noValido = !NOMBRE|| ! Torneo;
+    const { NOMBRE} = this.state;
+    const noValido = !NOMBRE;
     return noValido;
   };
 
@@ -39,7 +39,7 @@ class Nuevo extends Component {
     e.preventDefault();
    await this.setState({
 ID_USUARIO:this.props.auth[0].ID_USUARIO,
-
+ID_TORNEO: this.props.match.params.id,
 FECHA_DE_CREACION:new Date()
 })
 
@@ -50,7 +50,7 @@ FECHA_DE_CREACION:new Date()
     );
     this.setState({ data: data.data });
     alert(data.message);
-    this.props.history.push("/bloques");
+    this.props.history.push(`/bloques/${this.props.match.params.id}`);
   };
   async componentDidMount() {
     const Bloques = await fetchGet(
@@ -58,11 +58,6 @@ FECHA_DE_CREACION:new Date()
     );
     this.setState({ Bloques:Bloques.data });
 
-    const Torneos = await fetchGet(
-      `${process.env.REACT_APP_SERVER}/api/torneos/all`
-    );
-    this.setState({ Torneos:Torneos.data });
-    
   }
   updateStateTorneos = async(Torneo) => {
     await  this.setState({Torneo,
@@ -99,20 +94,7 @@ FECHA_DE_CREACION:new Date()
                   defaultValue={this.state.NOMBRE}
                 />
               </div>
-              <div className="form-group">
-                <label>ID_TORNEO:</label>
-                <Select
-                onChange={this.updateStateTorneos}
-                options={this.state.Torneos}
-                isMulti={false}
-                components={makeAnimated()}
-                placeholder={"Seleccione el torneo"}
-                getOptionLabel={(options) => options.ID_TORNEO}
-                getOptionValue={(options) => options.ID_TORNEO}
-                value={this.state.Bloque}
-              />
-              </div>
-            <button
+             <button
               disabled={this.validarForm()}
               type="submit"
               className="btn btn-success float-right"

@@ -149,6 +149,14 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
+                     {this.props.Access("1")  && (
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/bloques/${item.ID_TORNEO}`}
+                        className="btn btn-info m-1"
+                      >
+                        bloques
+                      </Link>
+                    )}
                   </div>
                   {/* </td> */}
                   {/* </tr> */}

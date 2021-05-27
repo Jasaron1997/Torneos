@@ -4,10 +4,11 @@ import authenticateToken from '../utils/authenticateToken';
 
 
 // Controllers
-import {Create,Update,Delete,All,Find} from '../controllers/partidos.controller';
+import {Create,Update,Delete,All,Find,ByBloques} from '../controllers/partidos.controller';
 // Routes
 router.post('/Create',authenticateToken, Create);
 router.get('/All',authenticateToken, All);
+router.get('/ByBloques/:ID',authenticateToken, ByBloques);
 router.post('/Delete',authenticateToken, Delete);
 router.put('/Update',authenticateToken, Update);
 router.get('/FIND/:ID',authenticateToken, Find);
