@@ -13,14 +13,6 @@ import Navbar from "./components/Navbar/navbar";
 import Inicio from "./components/Inicio";
 
 
-//roles
-import Rol from "./components/Seguridad/Roles";
-import RolNuevo from "./components/Seguridad/Roles/Nuevo";
-import RolEditar from "./components/Seguridad/Roles/Editar";
-
-//asign
-
-import Asing from "./components/Seguridad/Asing/Asing";
 
 //Usuarios
 import Usuario from "./components/Seguridad/Usuario";
@@ -99,23 +91,21 @@ if(data)
     const { auth  } = this.state;
     // console.log('auth',auth)
     let resultadoBusqueda;
-return true;
-    // if(auth){
-    //   auth.map((data, index) => {
-    //       if (data.NOMBRE_ACCESO === acceso) {
-  
-
-    //         resultadoBusqueda = true;
-    //         return true;
-    //       } else {
-    //         return false;
-    //       }
-    //   });
-    // }
-    // else{
-    //   return false;
-    // }
-    // return !!resultadoBusqueda;
+debugger
+    if(auth){
+      auth.map((data, index) => {
+          if (data.NIVEL_AUTORIZACION <= acceso) {
+            resultadoBusqueda = true;
+            return true;
+          } else {
+            return false;
+          }
+      });
+    }
+    else{
+      return false;
+    }
+    return !!resultadoBusqueda;
   };
 
   auth = (auth) => {

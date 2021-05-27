@@ -130,7 +130,7 @@ await this.setState({...estadoInicial})
                 
                     {this.props.Access("1")  && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/Partidos/modificar/${item.ID_BLOQUE}`}
+                        to={`${process.env.PUBLIC_URL}/Partidos/modificar/${item.ID_PARTIDO}`}
                         className="btn btn-warning m-1"
                       >
                         Modificar
@@ -139,7 +139,7 @@ await this.setState({...estadoInicial})
 
                     {this.props.Access("1") && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/Partidos/detalle/${item.ID_BLOQUE}`}
+                        to={`${process.env.PUBLIC_URL}/Partidos/detalle/${item.ID_PARTIDO}`}
                         className="btn btn-primary m-1"
                       >
                         Detalles
@@ -148,7 +148,7 @@ await this.setState({...estadoInicial})
                     {this.props.Access("1")  &&(
                       <button
                         onClick={() => {
-                          if (window.confirm("Seguro que deseas eliminar el bloque")) {
+                          if (window.confirm("Seguro que deseas eliminar el partido")) {
                             this.Eliminar(item);
                           }
                         }}
@@ -163,7 +163,7 @@ await this.setState({...estadoInicial})
                         to={`${process.env.PUBLIC_URL}/partidoDetalle/${item.ID_PARTIDO}`}
                         className="btn btn-info m-1"
                       >
-                        detalle
+                        Detalles del partido
                       </Link>
                     )}
                   </div>

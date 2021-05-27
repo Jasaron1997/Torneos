@@ -62,30 +62,9 @@ await this.setState({
     this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
   };
 
-
-  ActivoReactivo =  (e) => {
-    e.preventDefault();
-    console.log(this.state.estado,"Re Activar")
-  if(this.state.estado==="Re Activar")
-{
-this.Inactivos();
-}
-else{
-  this.Buscar();
-}
-  };
-
-
-  Reactivar = async (ID_USUARIO) => {
-    const data = await fetchDelete(
-      `${process.env.REACT_APP_SERVER}/api/usuario/delete/${ID_USUARIO}/${true}`
-    );
-    alert(data.message);
-   this.Inactivos();
-  };
-
+ 
   render() {
-    const redireccion = this.props.Access("VerUsuarios") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />
@@ -113,7 +92,7 @@ else{
           </button>
         </form>
 
-        {this.props.Access("CrearUsuarios") && (
+        {this.props.Access("2") && (
           <Link
             to={`${process.env.PUBLIC_URL}/usuarios/crear`}
             className="btn btn-link  ml-5 mr-5"
@@ -122,17 +101,7 @@ else{
           </Link>
         )}
 
-        {this.props.Access("ReactivarUsuarios") && (
-          <button 
-          onClick={this.ActivoReactivo}
-          className="btn btn-link  float-right  ml-5 mr-5">
-           {
-             this.state.estado
-           } 
-
-          </button>
-        )}
-        
+       
 
         {this.state.dataFiltrada && (
           <div className="ml-5 mr-5">
@@ -158,7 +127,7 @@ else{
                   <div className="col-md-1  d-none  d-sm-block ">{item.USUARIO}</div>
                   <div className="col-sm-3 col-xs-3">
                 
-                    {this.props.Access("ModificarUsuarios") &&(
+                    {this.props.Access("1") &&(
                       <Link
                         to={`${process.env.PUBLIC_URL}/usuarios/modificar/${item.ID_USUARIO}`}
                         className="btn btn-warning"
@@ -167,7 +136,7 @@ else{
                       </Link>
                     )}
 
-                    {this.props.Access("DetallesUsuarios") &&(
+                    {this.props.Access("1") &&(
                       <Link
                         to={`${process.env.PUBLIC_URL}/usuarios/detalle/${item.ID_USUARIO}`}
                         className="btn btn-primary m-1"
@@ -176,7 +145,7 @@ else{
                       </Link>
                     )}
 
-                    {this.props.Access("EliminarUsuarios")  && (
+                    {this.props.Access("1")  && (
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas eliminar usuario")) {

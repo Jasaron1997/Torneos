@@ -17,7 +17,7 @@ const crearToken = (usuarioLogin, secreto, expiresIn) => {
 export async function auth(req, res) {
   const { id, user, password } = req.body;
   try {
-    const userone = await sequelize.query(`select users.*, rol.NOMBRE_ROL
+    const userone = await sequelize.query(`select users.*, rol.NOMBRE_ROL,rol.NIVEL_AUTORIZACION
     from USUARIOS users,
     ROLES rol
     where users.ID_ROL=rol.ID_ROL

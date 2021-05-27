@@ -89,23 +89,13 @@ Eliminar = async (item) => {
           </button>
         </form>
 
-        {this.props.Access("CrearRoles") && (
+        {this.props.Access("1") && (
           <Link
             to={`${process.env.PUBLIC_URL}/roles/crear`}
             className="btn btn-link  ml-5 mr-5"
           >
             Crear
           </Link>
-        )}
-   {this.props.Access("ReactivarRoles") && (
-          <button 
-          onClick={this.ActivoReactivo}
-          className="btn btn-link  float-right  ml-5 mr-5">
-           {
-             this.state.estado
-           } 
-
-          </button>
         )}
 
         {this.state.dataFiltrada && (
@@ -123,7 +113,7 @@ Eliminar = async (item) => {
                   <div className="col-sm-4 col-xs-4 d-none d-sm-block">{item.NIVEL_AUTORIZACION}</div>    
                   <div className="col-sm-4 col-xs-4">
                 
-                    {this.props.Access("ModificarRoles")  &&  (
+                    {this.props.Access("1")  &&  (
                       <Link
                         to={`${process.env.PUBLIC_URL}/roles/modificar/${item.ID_ROL}`}
                         className="btn btn-warning m-1"
@@ -132,7 +122,7 @@ Eliminar = async (item) => {
                       </Link>
                     )}
 
-                    {this.props.Access("DetallesRoles")  && (
+                    {this.props.Access("1")  && (
                       <Link
                         to={`${process.env.PUBLIC_URL}/roles/detalle/${item.ID_ROL}`}
                         className="btn btn-primary m-1"
@@ -140,7 +130,7 @@ Eliminar = async (item) => {
                         Detalles
                       </Link>
                     )}
-                    {this.props.Access("EliminarRoles")  && (
+                    {this.props.Access("1")  && (
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas el rol")) {
