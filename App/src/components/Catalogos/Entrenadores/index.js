@@ -136,7 +136,7 @@ await this.setState({...estadoInicial})
                         Detalles
                       </Link>
                     )}
-                    {this.props.Access("EliminarRoles")  &&(
+                    {this.props.Access("1")  &&(
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas eliminar al jugador")) {

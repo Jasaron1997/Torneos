@@ -164,7 +164,7 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
                         Detalles
                       </Link>
                     )}
-                    {this.props.Access("EliminarRoles")  && item.ESTADO&& (
+                    {this.props.Access("1")  && item.ESTADO&& (
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas el rol")) {
