@@ -21,6 +21,29 @@ export async function All(req, res) {
       });
   }
 }
+export async function ByBloques(req, res) {
+  try {
+  const { ID } = req.params;
+    const datos = await sequelize.query(`select* from  PARTIDOS where ID_BLOQUE=${ID}   `, {
+      replacements: {},
+      type: sequelize.QueryTypes.SELECT,
+    });
+    if (datos) {
+      return res.json({
+        message: "SE ENCONTRARON DATOS DE PARTIDOS",
+        data: datos,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({
+        message: "No se pudo encontraron datos del PARTIDOS.",
+        data: [],
+      });
+  }
+}
 export async function Find(req, res) {
   const { ID } = req.params;
   try {
@@ -46,16 +69,16 @@ export async function Find(req, res) {
 }
 export async function Create(req, res) {
   const {
-    FECHA_DE_CREACION,
-    ID_USUARIO,
-    ID_BLOQUE,
-    ID_LOCAL,
-    ID_VISITANTE,
-    GOLES_LOCAL,
-    GOLES_VISITANTE,
-    ID_ARBITRO1,
-    ID_ARBITRO2,
-    ID_ARBITRO3,
+    FECHA_DE_CREACION=null,
+    ID_USUARIO=null,
+    ID_BLOQUE=null,
+    ID_LOCAL=null,
+    ID_VISITANTE=null,
+    GOLES_LOCAL=null,
+    GOLES_VISITANTE=null,
+    ID_ARBITRO1=null,
+    ID_ARBITRO2=null,
+    ID_ARBITRO3=null,
   } = req.body;
   try {
     const datos = await sequelize.query(

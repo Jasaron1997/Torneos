@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { fetchGet,fetchDelete, fetchPost} from "../../../utils/Fetch";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect,withRouter } from "react-router-dom";
 
 const estadoInicial = { BuscarDatos: "", data: null };
 
@@ -11,7 +11,8 @@ class Bloques extends Component {
   }
 
   Buscar = async () =>{
-    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/bloques/all`);
+    const { id } = this.props.match.params;
+    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/bloques/ByTorneos/${id}`);
     this.setState({ dataFiltrada: data.data, data: data.data,estado:"Re Activar"});
   }
 
@@ -55,10 +56,8 @@ await this.setState({...item})
   alert(data.message);
 
 await this.setState({...estadoInicial})
-
-  const dataGet = await fetchGet(
-    `${process.env.REACT_APP_SERVER}/api/bloques/all`
-  );
+  const { id } = this.props.match.params;
+  const dataGet = await fetchGet(`${process.env.REACT_APP_SERVER}/api/bloques/ByTorneos/${id}`);
   this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
 };
 
@@ -94,7 +93,7 @@ await this.setState({...estadoInicial})
 
         {this.props.Access("1") && (
           <Link
-            to={`${process.env.PUBLIC_URL}/bloques/crear`}
+            to={`${process.env.PUBLIC_URL}/bloques/crear/${this.props.match.params.id}`}
             className="btn btn-link  ml-5 mr-5"
           >
             Crear
@@ -103,18 +102,16 @@ await this.setState({...estadoInicial})
         {this.state.dataFiltrada && (
           <div className="ml-5 mr-5">
             <div className="row border">
-              <div className="col-sm-3 col-xs-3">NOMBRE</div>
-              <div className="col-sm-1 col-xs-1">USUARIO</div>
-              <div className="col-sm-1 col-xs-1">TORNEO</div>
+              <div className="col-sm-4 col-xs-4">NOMBRE</div>
+              <div className="col-sm-4 col-xs-4">TORNEO</div>
               <div className="col-sm-4 col-xs-4">OPCIONES</div>
             </div>
             {this.state.dataFiltrada.map((item) => {
               const { ID_BLOQUE } = item;
               return (
                 <div className="row border" key={ID_BLOQUE}>
-                  <div className="col-sm-3 col-xs-3">{item.NOMBRE}</div>
-                  <div className="col-sm-1 col-xs-1">{item.USUARIO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.ID_TORNEO}</div>
+                  <div className="col-sm-4 col-xs-4">{item.NOMBRE}</div>
+                  <div className="col-sm-4 col-xs-4">{item.TORNEO}</div>
                   <div className="col-sm-4 col-xs-4">
                 
                     {this.props.Access("1")  && (
@@ -147,6 +144,14 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
+                     {this.props.Access("1")  && (
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/partidos/${item.ID_BLOQUE}`}
+                        className="btn btn-info m-1"
+                      >
+                        Partidos
+                      </Link>
+                    )}
                   </div>
                   {/* </td> */}
                   {/* </tr> */}
@@ -160,4 +165,4 @@ await this.setState({...estadoInicial})
   }
 }
 
-export default Bloques;
+export default withRouter(Bloques);

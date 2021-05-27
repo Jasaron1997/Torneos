@@ -30,8 +30,8 @@ import makeAnimated from "react-select/animated";
     };
   
     validarForm = () => {
-      const { NOMBRE, Torneo} = this.state;
-      const noValido = !NOMBRE|| ! Torneo;
+      const { NOMBRE} = this.state;
+      const noValido = !NOMBRE;
       return noValido;
     };
     
@@ -42,31 +42,19 @@ import makeAnimated from "react-select/animated";
         `${process.env.REACT_APP_SERVER}/api/bloques/find/${id}`
       );
      await this.setState({ ...data.data });
-  
-    debugger
-      const Torneos = await fetchGet(
-        `${process.env.REACT_APP_SERVER}/api/Torneos/all`
-      );
-      await this.setState({ Torneos:Torneos.data });
-  
-      const Torneo=this.state.Torneo.find(x=>x.ID_TORNEO==this.state.ID_TORNEO)
     
-     await this.updateStateDepartamento(Torneo)
     }
     
       Editar = async (e) => {
         e.preventDefault();
-    
-        await this.setState({
-          NOMBRE_COMPLETO:`${this.state.NOMBRE1} ${this.state.NOMBRE2} ${this.state.APELLIDO1} ${this.state.APELLIDO2}`
-              })
+      
         const data = await fetchPut(
           `${process.env.REACT_APP_SERVER}/api/bloques/Update`,
           this.state
         );
         this.setState({ data: data.data });
         alert(data.message);
-        this.props.history.push("/bloques");
+        this.props.history.push(`/bloques/${this.props.match.params.id}`);
       };
       updateStateTorneos = async(Torneo) => {
         await  this.setState({Torneo,
@@ -111,20 +99,6 @@ import makeAnimated from "react-select/animated";
                   defaultValue={this.state.NOMBRE}
                   readOnly={!this.props.modificar} 
                 />
-              </div>
-              <div className="form-group">
-                <label>Torneo:</label>
-                <Select
-                onChange={this.updateStateTorneo}
-                options={this.state.Torneo}
-                isMulti={false}
-                components={makeAnimated()}
-                isDisabled={ !this.props.modificar}
-                placeholder={"Seleccione el torneo"}
-                getOptionLabel={(options) => options.ID_TORNEO}
-                getOptionValue={(options) => options.ID_TORNEO}
-                value={this.state.Torneo}
-              />
               </div>
               {this.props.modificar && (            
               <button

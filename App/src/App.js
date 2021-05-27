@@ -173,11 +173,6 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/detalle/:id`} render={() => <ArbitrosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/arbitros/modificar/:id`} render={() => <ArbitrosEditar modificar={true} Access={this.Access}/>} />
 
-{/* BLOQUES  */}
-<Route exact path={`${process.env.PUBLIC_URL}/bloques`} render={() => <Bloques Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/bloques/crear`} render={() => <BloquesNuevo Access={this.Access} auth={this.state.auth}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/bloques/detalle/:id`} render={() => <BloquesEditar modificar={false} Access={this.Access}/>} />
-          <Route exact path={`${process.env.PUBLIC_URL}/bloques/modificar/:id`} render={() => <BloquesEditar modificar={true} Access={this.Access}/>} />
 {/* entrenadores  */}
 <Route exact path={`${process.env.PUBLIC_URL}/entrenadores`} render={() => <Entrenadores Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/entrenadores/crear`} render={() => <EntrenadoresNuevo Access={this.Access} auth={this.state.auth}/>} />
@@ -211,6 +206,19 @@ return true;
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/crear`} render={() => <TorneosNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/detalle/:id`} render={() => <TorneosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/modificar/:id`} render={() => <TorneosEditar modificar={true} Access={this.Access}/>} />
+
+  {/* BLOQUES  */}
+<Route exact path={`${process.env.PUBLIC_URL}/bloques/:id`} render={() => <Bloques Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/bloques/crear/:id`} render={() => <BloquesNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/bloques/detalle/:id`} render={() => <BloquesEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/bloques/modificar/:id`} render={() => <BloquesEditar modificar={true} Access={this.Access}/>} />
+
+ {/* partidos  */}
+ <Route exact path={`${process.env.PUBLIC_URL}/partidos/:id`} render={() => <Partidos Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/partidos/crear/:id`} render={() => <PartidosNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/partidos/detalle/:id`} render={() => <PartidosEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/partidos/modificar/:id`} render={() => <PartidosEditar modificar={true} Access={this.Access}/>} />
+
 
          </Switch>
         </header>

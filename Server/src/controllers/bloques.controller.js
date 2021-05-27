@@ -18,6 +18,29 @@ export async function All(req, res) {
       .json({ message: "No se pudo encontraron datos del BLOQUES.", data: [] });
   }
 }
+
+export async function ByTorneso(req, res) {
+  try {
+  const { ID } = req.params;
+    const datos = await sequelize.query(`select BLO.*,TOR.NOMBRE TORNEO from  BLOQUES BLO
+    INNER JOIN TORNEOS TOR ON TOR.ID_TORNEO=BLO.ID_TORNEO
+    where BLO.ID_TORNEO=${ID}  `, {
+      replacements: {},
+      type: sequelize.QueryTypes.SELECT,
+    });
+    if (datos) {
+      return res.json({
+        message: "SE ENCONTRARON DATOS DE BLOQUES",
+        data: datos,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "No se pudo encontraron datos del BLOQUES.", data: [] });
+  }
+}
 export async function Find(req, res) {
   const { ID } = req.params;
   try {

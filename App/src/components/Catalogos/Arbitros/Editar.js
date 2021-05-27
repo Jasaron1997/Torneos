@@ -54,7 +54,6 @@ import makeAnimated from "react-select/animated";
    await this.updateStateDepartamento(Departamento)
 
     const Municipio=this.state.Municipios.find(x=>x.ID_MUNICIPIO==this.state.ID_MUNICIPIO)
-
     await this.setState({ Municipio:Municipio });
 
   }

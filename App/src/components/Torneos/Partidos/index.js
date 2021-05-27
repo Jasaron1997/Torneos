@@ -1,17 +1,18 @@
 import React, { Component, Fragment } from "react";
-import { fetchGet,fetchDelete} from "../../../utils/Fetch";
-import { Link, Redirect } from "react-router-dom";
+import { fetchGet,fetchDelete, fetchPost} from "../../../utils/Fetch";
+import { Link, Redirect,withRouter } from "react-router-dom";
 
 const estadoInicial = { BuscarDatos: "", data: null };
 
-class Rol extends Component {
+class Partidos extends Component {
   constructor(props) {
     super(props);
     this.state = { data: estadoInicial };
   }
 
   Buscar = async () =>{
-    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/roles`);
+    const { id } = this.props.match.params;
+    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/Partidos/byBloques/${id}`);
     this.setState({ dataFiltrada: data.data, data: data.data,estado:"Re Activar"});
   }
 
@@ -30,7 +31,7 @@ class Rol extends Component {
   BuscarDatos = (e) => {
     e.preventDefault();
     const patt = new RegExp(`${this.state.BuscarDatos}`, "gi");
-    const datos = this.state.data.filter((dat) => patt.exec(dat.NOMBRE_ROL));
+    const datos = this.state.data.filter((dat) => patt.exec(dat.LOCAL));
 
     this.setState({
       dataFiltrada: datos,
@@ -46,46 +47,23 @@ cambioEstado = (e) => {
 
 
 
-Eliminar = async (ID_ROL) => {
-  const data = await fetchDelete(
-    `${process.env.REACT_APP_SERVER}/api/roles/${ID_ROL}/${false}`
+Eliminar = async (item) => {
+await this.setState({...item})
+
+  const data = await fetchPost(
+    `${process.env.REACT_APP_SERVER}/api/Partidos/delete`,this.state
   );
   alert(data.message);
-  const dataGet = await fetchGet(
-    `${process.env.REACT_APP_SERVER}/api/roles`
-  );
+
+await this.setState({...estadoInicial})
+  const { id } = this.props.match.params;
+  const dataGet = await fetchGet(`${process.env.REACT_APP_SERVER}/api/Partidos/byBloques/${id}`);
   this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
 };
 
 
-ActivoReactivo =  (e) => {
-  e.preventDefault();
-  console.log(this.state.estado,"Re Activar")
-if(this.state.estado==="Re Activar")
-{
-this.Inactivos();
-}
-else{
-this.Buscar();
-}
-};
-
-
-Reactivar = async (ID_ROL) => {
-  const data = await fetchDelete(
-    `${process.env.REACT_APP_SERVER}/api/roles/${ID_ROL}/${true}`
-  );
-  alert(data.message);
- this.Inactivos();
-};
-
-Inactivos = async () => {
-const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/roles/inactivo`);
-this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
-};
-
   render() {
-    const redireccion = this.props.Access("VerRoles") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />
@@ -94,10 +72,10 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
     return (
       <Fragment>
         {redireccion}
-        <h1 className="text-center mb-5">Rol</h1>
+        <h1 className="text-center mb-5">Partidos</h1>
         <form class="form-inline " onSubmit={this.BuscarDatos}>
           <label className="ml-5 mr-5">
-            <strong>Nombre Rol:</strong>
+            <strong>Nombre:</strong>
           </label>
           <input
             class="form-control mr-sm-5"
@@ -113,62 +91,65 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
           </button>
         </form>
 
-        {this.props.Access("CrearRoles") && (
+        {this.props.Access("1") && (
           <Link
-            to={`${process.env.PUBLIC_URL}/roles/crear`}
+            to={`${process.env.PUBLIC_URL}/Partidos/crear/${this.props.match.params.id}`}
             className="btn btn-link  ml-5 mr-5"
           >
             Crear
           </Link>
         )}
-   {this.props.Access("ReactivarRoles") && (
-          <button 
-          onClick={this.ActivoReactivo}
-          className="btn btn-link  float-right  ml-5 mr-5">
-           {
-             this.state.estado
-           } 
-
-          </button>
-        )}
-
         {this.state.dataFiltrada && (
           <div className="ml-5 mr-5">
             <div className="row border">
-              <div className="col-sm-4 col-xs-4">NOMBRE</div>
-              <div className="col-sm-4 col-xs-4 d-none d-sm-block">DESCRIPCION</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
+              <div className="col-sm-1 col-xs-1">FECHA</div>
+              <div className="col-sm-1 col-xs-1">BLOQUE</div>
+              <div className="col-sm-1 col-xs-1">LOCAL</div>
+              <div className="col-sm-1 col-xs-1">VISITANTE</div>
+              <div className="col-sm-1 col-xs-1">GOLES LOCAL</div>
+              <div className="col-sm-1 col-xs-1">GOLES VISITANTES</div>
+              <div className="col-sm-1 col-xs-1">ARBITRO 1</div>
+              <div className="col-sm-1 col-xs-1">ARBITRO 2</div>
+              <div className="col-sm-1 col-xs-1">ARBITRO 3</div>
+              <div className="col-sm-3 col-xs-3">OPCIONES</div>
             </div>
             {this.state.dataFiltrada.map((item) => {
-              const { ID_ROL } = item;
+              const { ID_PARTIDO } = item;
               return (
-                <div className="row border" key={ID_ROL}>
-                  <div className="col-sm-4 col-xs-4">{item.NOMBRE_ROL}</div>
-                  <div className="col-sm-4 col-xs-4 d-none d-sm-block">{item.DESCRIPCION_ROL}</div>    
-                  <div className="col-sm-4 col-xs-4">
+                <div className="row border" key={ID_PARTIDO}>
+                  <div className="col-sm-1 col-xs-1">{new Date(item.FECHA_DE_CREACION).toLocaleDateString()}</div>
+                  <div className="col-sm-1 col-xs-1">{item.BLOQUE}</div>
+                  <div className="col-sm-1 col-xs-1">{item.LOCAL}</div>
+                  <div className="col-sm-1 col-xs-1">{item.VISITANTE}</div>
+                  <div className="col-sm-1 col-xs-1">{item.GOLES_LOCAL}</div>
+                  <div className="col-sm-1 col-xs-1">{item.GOLES_VISITANTE}</div>
+                  <div className="col-sm-1 col-xs-1">{item.ARBITRO1}</div>
+                  <div className="col-sm-1 col-xs-1">{item.ARBITRO2}</div>
+                  <div className="col-sm-1 col-xs-1">{item.ARBITRO3}</div>
+                  <div className="col-sm-3 col-xs-3">
                 
-                    {this.props.Access("ModificarRoles")  && item.ESTADO && (
+                    {this.props.Access("1")  && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/roles/modificar/${item.ID_ROL}`}
+                        to={`${process.env.PUBLIC_URL}/Partidos/modificar/${item.ID_BLOQUE}`}
                         className="btn btn-warning m-1"
                       >
                         Modificar
                       </Link>
                     )}
 
-                    {this.props.Access("DetallesRoles")  && item.ESTADO && (
+                    {this.props.Access("1") && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/roles/detalle/${item.ID_ROL}`}
+                        to={`${process.env.PUBLIC_URL}/Partidos/detalle/${item.ID_BLOQUE}`}
                         className="btn btn-primary m-1"
                       >
                         Detalles
                       </Link>
                     )}
-                    {this.props.Access("EliminarRoles")  && item.ESTADO&& (
+                    {this.props.Access("1")  &&(
                       <button
                         onClick={() => {
-                          if (window.confirm("Seguro que deseas el rol")) {
-                            this.Eliminar(item.ID_ROL);
+                          if (window.confirm("Seguro que deseas eliminar el bloque")) {
+                            this.Eliminar(item);
                           }
                         }}
                         type="button"
@@ -177,27 +158,14 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
                         &times; Eliminar
                       </button>
                     )}
-                  {this.props.Access("ReactivarRoles")  && (item.ESTADO===false) && (
-                      <button
-                        onClick={() => {
-                          if (window.confirm("Seguro que deseas el role")) {
-                            this.Reactivar(item.ID_ROL);
-                          }
-                        }}
-                        type="button"
-                        className="btn btn-danger m-1 "
+                     {this.props.Access("1")  && (
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/partidoDetalle/${item.ID_PARTIDO}`}
+                        className="btn btn-info m-1"
                       >
-                        &times; Activar
-                      </button>
+                        detalle
+                      </Link>
                     )}
-                    {this.props.Access("VerAsingar") &&   (
-                        <Link
-                          to={`${process.env.PUBLIC_URL}/asing/${item.ID_ROL}`}
-                          className="btn btn-warning m-1"
-                        >
-                          Asign. Accesos
-                        </Link>
-                      )}
                   </div>
                   {/* </td> */}
                   {/* </tr> */}
@@ -211,4 +179,4 @@ this.setState({ dataFiltrada: data.data, data: data.data,estado:"Activos"  });
   }
 }
 
-export default Rol;
+export default withRouter(Partidos);
