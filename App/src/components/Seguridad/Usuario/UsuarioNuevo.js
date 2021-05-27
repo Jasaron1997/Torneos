@@ -76,7 +76,7 @@ await this.setState({FECHA_DE_CREACION:new Date()})
   };
 
   render() {
-    const redireccion = this.props.Access("CrearUsuarios") ? (
+    const redireccion = this.props.Access("1") ? (
       ""
     ) : (
       <Redirect to="/login" />
@@ -109,7 +109,7 @@ await this.setState({FECHA_DE_CREACION:new Date()})
                   type="password"
                   name="CONTRA_USUARIO"
                   className="form-control"
-                  placeholder="Descripcion de la acceso"
+                  placeholder=""
                   onChange={this.UpdateState}
                   defaultValue={this.state.CONTRA_USUARIOR}
                 />

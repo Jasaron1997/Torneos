@@ -72,7 +72,7 @@
     };
   
     render() {
-      const redireccion = this.props.Access("ModificarUsuarios") ? (
+      const redireccion = this.props.Access("1") ? (
         ""
       ) : (
         <Redirect to="/login" />
@@ -108,7 +108,7 @@
               <div className="form-group">
                 <label>Contraseña:</label>
                 <input
-                  type={ this.props.Access("VerContra") ? (
+                  type={ this.props.Access("0") ? (
         "text"
       ) : "password"}
                   name="CONTRA_USUARIO"
