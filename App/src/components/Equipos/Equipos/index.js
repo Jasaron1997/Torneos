@@ -103,9 +103,9 @@ await this.setState({...estadoInicial})
         {this.state.dataFiltrada && (
           <div className="ml-5 mr-5">
             <div className="row border">
-              <div className="col-sm-3 col-xs-3">NOMBRE</div>
-              <div className="col-sm-3 col-xs-3">DIRECCION</div>
-              <div className="col-sm-1 col-xs-1">DEPARTAMENTO</div>
+              <div className="col-sm-1 col-xs-1">NOMBRE</div>
+              <div className="col-sm-1 col-xs-1">DIRECCION</div>
+              <div className="col-sm-2 col-xs-2">DEPARTAMENTO</div>
               <div className="col-sm-1 col-xs-1">MUNICIPIO</div>
               <div className="col-sm-1 col-xs-1">ENTRENADOR</div>
               <div className="col-sm-4 col-xs-4">OPCIONES</div>
@@ -114,16 +114,16 @@ await this.setState({...estadoInicial})
               const { ID_EQUIPO } = item;
               return (
                 <div className="row border" key={ID_EQUIPO}>
-                  <div className="col-sm-3 col-xs-3">{item.NOMBRE}</div>
-                  <div className="col-sm-3 col-xs-3">{item.DIRECCION}</div>
-                  <div className="col-sm-1 col-xs-1">{item.DEPARTAMENTO}</div>
+                  <div className="col-sm-1 col-xs-1">{item.NOMBRE}</div>
+                  <div className="col-sm-1 col-xs-1">{item.DIRECCION}</div>
+                  <div className="col-sm-2 col-xs-2">{item.DEPARTAMENTO}</div>
                   <div className="col-sm-1 col-xs-1">{item.MUNICIPIO}</div>
                   <div className="col-sm-1 col-xs-1">{item.ENTRENADOR}</div>
                   <div className="col-sm-4 col-xs-4">
                 
                     {this.props.Access("1")  && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/Equipos/modificar/${item.ID_JUGADOR}`}
+                        to={`${process.env.PUBLIC_URL}/Equipos/modificar/${item.ID_EQUIPO}`}
                         className="btn btn-warning m-1"
                       >
                         Modificar
@@ -132,13 +132,13 @@ await this.setState({...estadoInicial})
 
                     {this.props.Access("1") && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/Euipos/detalle/${item.ID_JUGADOR}`}
+                        to={`${process.env.PUBLIC_URL}/Equipos/detalle/${item.ID_EQUIPO}`}
                         className="btn btn-primary m-1"
                       >
                         Detalles
                       </Link>
                     )}
-                    {this.props.Access("EliminarRoles")  &&(
+                    {this.props.Access("1")  &&(
                       <button
                         onClick={() => {
                           if (window.confirm("Seguro que deseas eliminar al equipo")) {

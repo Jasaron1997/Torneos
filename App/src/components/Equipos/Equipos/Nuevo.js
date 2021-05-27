@@ -4,6 +4,9 @@ import { withRouter, Redirect } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
+
+fsdfsdfsdf
+
 const initialState = {
   ID_ROL:""
   ,NOMBRE_ROL:""
@@ -58,14 +61,14 @@ NOMBRE_COMPLETO:`${this.state.NOMBRE1} ${this.state.NOMBRE2} ${this.state.APELLI
     );
     this.setState({ Departamentos:Departamentos.data });
 
-    const Posiciones = await fetchGet(
+    const Entrenadores = await fetchGet(
       `${process.env.REACT_APP_SERVER}/api/Entrenadores/all`
     );
     this.setState({ Entrenadores:Entrenadores.data });
   }
 
-  updateStatePosiciones = async(Entrenadores) => {
-    await  this.setState({Entrenadores,
+  updateStateEntrenadores = async(Entrenador) => {
+    await  this.setState({Entrenador,
       ID_ENTRENADOR:Entrenador.ID_ENTRENADOR,
       });
   }
@@ -157,12 +160,12 @@ const data = await fetchGet(
               <div className="form-group">
                 <label>Entrenador:</label>
                 <Select
-                onChange={this.updateStatePosiciones}
+                onChange={this.updateStateEntrenadores}
                 options={this.state.Entrenadores}
                 isMulti={false}
                 components={makeAnimated()}
-                placeholder={"Seleccione la posicion"}
-                getOptionLabel={(options) => options.NOMBRE}
+                placeholder={"Seleccione el entrenador"}
+                getOptionLabel={(options) => options.NOMBRE_COMPLETO}
                 getOptionValue={(options) => options.ID_ENTRENADOR}
                 value={this.state.Entrenador}
               />

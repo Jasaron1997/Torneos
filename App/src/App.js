@@ -195,7 +195,7 @@ return true;
 
 
 
-<Route exact path={`${process.env.PUBLIC_URL}/equipos`} render={() => <Posiciones Access={this.Access}/>} />
+<Route exact path={`${process.env.PUBLIC_URL}/equipos`} render={() => <Equipos Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/equipos/crear`} render={() => <EquiposNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/equipos/detalle/:id`} render={() => <EquiposEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/equipos/modificar/:id`} render={() => <EquiposEditar modificar={true} Access={this.Access}/>} />

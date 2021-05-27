@@ -60,9 +60,9 @@ import makeAnimated from "react-select/animated";
       `${process.env.REACT_APP_SERVER}/api/Entrenadores/all`
     );
     this.setState({ Entrenadores:Entrenadores.data });
-    const Entrenadores=this.state.Entrenadores.find(x=>x.ID_ENTRENADOR==this.state.ID_ENTRENADOR)
+    const Entrenador=this.state.Entrenadores.find(x=>x.ID_ENTRENADOR==this.state.ID_ENTRENADOR)
 
-    await this.setState({ Entrenadores:Entrenadores});
+    await this.setState({ Entrenador:Entrenador});
 
 
   }
@@ -82,9 +82,9 @@ import makeAnimated from "react-select/animated";
       this.props.history.push("/equipos");
     };
   
-    updateStateEntrenadores = async(Entrenadores) => {
-      await  this.setState({Entrenadores,
-        ID_ENTRENADOR:Posicion.ID_ENTRENADOR,
+    updateStateEntrenadores = async(Entrenador) => {
+      await  this.setState({Entrenador,
+        ID_ENTRENADOR:Entrenador.ID_ENTRENADOR,
         });
       };
     updateStateMunicipios = async(Municipio) => {
@@ -188,7 +188,7 @@ import makeAnimated from "react-select/animated";
                 isMulti={false}
                 components={makeAnimated()}
                 placeholder={"Seleccione al Entrenador"}
-                getOptionLabel={(options) => options.NOMBRE}
+                getOptionLabel={(options) => options.NOMBRE_COMPLETO}
                 getOptionValue={(options) => options.ID_ENTRENADOR}
                 value={this.state.Entrenadores}
                 isDisabled={ !this.props.modificar}
