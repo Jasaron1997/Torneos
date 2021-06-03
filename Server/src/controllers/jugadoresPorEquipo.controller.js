@@ -2,7 +2,10 @@ const { sequelize } = require("../database/database");
 export async function All(req, res) {
   try {
     const datos = await sequelize.query(
-      `select* from  JUGADORES_POR_EQUIPO   `,
+      `select jpe.*,eq.NOMBRE EQUIPO,JUG.NOMBRE_COMPLETO JUGADOR,pos.NOMBRE POSICION  from JUGADORES_POR_EQUIPO jpe
+      inner join EQUIPOS eq on eq.ID_EQUIPO=jpe.ID_EQUIPO
+      inner join  JUGADORES jug on jug.ID_JUGADOR=jpe.ID_JUGADOR
+      inner join  POSCICIONES POS on POS.ID_POSICION=jpe.ID_POSICION   `,
       { replacements: {}, type: sequelize.QueryTypes.SELECT }
     );
     if (datos) {

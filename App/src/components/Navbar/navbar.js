@@ -188,6 +188,12 @@ class navbar extends Component {
                       >
                       Equipos
                       </Link>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/Jugadores_Por_Equipo`}
+                        className="dropdown-item"
+                      >
+                      Jugadores_Por_Equipo
+                      </Link>
                     
                   </div>
                 </div>

@@ -26,6 +26,7 @@ import partidosRoutes from "./routes/partidos";
  import rolesRoutes from "./routes/roles";
  import torneosRoutes from "./routes/torneos";
  import usuarioRoutes from "./routes/usuario";
+ import detallePartidoRoutes from "./routes/detallePartido";
 
 
 
@@ -43,6 +44,7 @@ app.use("/api/departamentos",departamentosRoutes);
 app.use("/api/entrenadores",entrenadoresRoutes);
 app.use("/api/jugadores",jugadoresRoutes);
 app.use("/api/jugadores_Por_Equipo",jugadoresPorEquipoRoutes);
+app.use("/api/detalle_partido",detallePartidoRoutes);
 app.use("/api/municipios",municipiosRoutes);
 app.use("/api/partidos",partidosRoutes);
 app.use("/api/posiciones",posicionesRoutes);

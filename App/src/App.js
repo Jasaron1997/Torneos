@@ -60,6 +60,9 @@ import TorneosNuevo from "./components/Torneos/Torneos/Nuevo";
 import Partidos from "./components/Torneos/Partidos";
 import PartidosEditar from "./components/Torneos/Partidos/Editar";
 import PartidosNuevo from "./components/Torneos/Partidos/Nuevo";
+import DETALLE_PARTIDO from "./components/Torneos/Detalle";
+import DETALLE_PARTIDONuevo from "./components/Torneos/Detalle/Nuevo";
+import DETALLE_PARTIDOEditar from "./components/Torneos/Detalle/Editar";
 
 
 class App extends Component {
@@ -91,7 +94,6 @@ if(data)
     const { auth  } = this.state;
     // console.log('auth',auth)
     let resultadoBusqueda;
-debugger
     if(auth){
       auth.map((data, index) => {
           if (data.NIVEL_AUTORIZACION <= acceso) {
@@ -189,6 +191,10 @@ debugger
           <Route exact path={`${process.env.PUBLIC_URL}/equipos/crear`} render={() => <EquiposNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/equipos/detalle/:id`} render={() => <EquiposEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/equipos/modificar/:id`} render={() => <EquiposEditar modificar={true} Access={this.Access}/>} />
+<Route exact path={`${process.env.PUBLIC_URL}/Jugadores_Por_Equipo`} render={() => <JugadoresPorEquipo Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/Jugadores_Por_Equipo/crear`} render={() => <JugadoresPorEquipoNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/Jugadores_Por_Equipo/detalle/:id`} render={() => <JugadoresPorEquipoEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/Jugadores_Por_Equipo/modificar/:id`} render={() => <JugadoresPorEquipoEditar modificar={true} Access={this.Access}/>} />
 
 
  {/* Torneos  */}
@@ -202,6 +208,11 @@ debugger
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/crear/:id`} render={() => <BloquesNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/detalle/:id`} render={() => <BloquesEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/modificar/:id`} render={() => <BloquesEditar modificar={true} Access={this.Access}/>} />
+  {/* DETALLE PARTIDO   */}
+<Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/:id`} render={() => <DETALLE_PARTIDO Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/crear/:id`} render={() => <DETALLE_PARTIDONuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/detalle/:id`} render={() => <DETALLE_PARTIDOEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/modificar/:id`} render={() => <DETALLE_PARTIDOEditar modificar={true} Access={this.Access}/>} />
 
  {/* partidos  */}
  <Route exact path={`${process.env.PUBLIC_URL}/partidos/:id`} render={() => <Partidos Access={this.Access}/>} />

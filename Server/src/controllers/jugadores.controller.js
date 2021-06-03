@@ -50,6 +50,36 @@ export async function Find(req, res) {
       });
   }
 }
+
+export async function byEquipo(req, res) {
+  try {
+  const { ID } = req.params;
+const wuer=
+`select jpe.*,eq.NOMBRE EQUIPO,JUG.NOMBRE_COMPLETO JUGADOR,pos.NOMBRE POSICION  from JUGADORES_POR_EQUIPO jpe
+inner join EQUIPOS eq on eq.ID_EQUIPO=jpe.ID_EQUIPO
+inner join  JUGADORES jug on jug.ID_JUGADOR=jpe.ID_JUGADOR
+inner join  POSCICIONES POS on POS.ID_POSICION=jpe.ID_POSICION
+where eq.ID_EQUIPO=${ID}   `
+console.log(wuer)
+    const datos = await sequelize.query(wuer,
+      { replacements: {}, type: sequelize.QueryTypes.SELECT }
+    );
+    if (datos) {
+      return res.json({
+        message: "SE ENCONTRARON DATOS DE JUGADORES_POR_EQUIPO",
+        data: datos,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({
+        message: "No se pudo encontraron datos del JUGADORES_POR_EQUIPO.",
+        data: [],
+      });
+  }
+}
 export async function Create(req, res) {
   const {
     NOMBRE1,
