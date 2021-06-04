@@ -60,10 +60,15 @@ import TorneosNuevo from "./components/Torneos/Torneos/Nuevo";
 import Partidos from "./components/Torneos/Partidos";
 import PartidosEditar from "./components/Torneos/Partidos/Editar";
 import PartidosNuevo from "./components/Torneos/Partidos/Nuevo";
+import PartidosBloque from "./components/Torneos/PartidosBLOQUE";
+import PartidosBloqueEditar from "./components/Torneos/PartidosBLOQUE/Editar";
+import PartidosBloqueNuevo from "./components/Torneos/PartidosBLOQUE/Nuevo";
 import DETALLE_PARTIDO from "./components/Torneos/Detalle";
 import DETALLE_PARTIDONuevo from "./components/Torneos/Detalle/Nuevo";
 import DETALLE_PARTIDOEditar from "./components/Torneos/Detalle/Editar";
-
+import DETALLE_PARTIDOBLOQUE from "./components/Torneos/PartidosBLOQUE/Detalle";
+import DETALLE_PARTIDONuevoBLOQUE from "./components/Torneos/PartidosBLOQUE/Detalle/Nuevo";
+import DETALLE_PARTIDOEditarBLOQUE from "./components/Torneos/PartidosBLOQUE/Detalle/Editar";
 
 class App extends Component {
   constructor(props) {
@@ -208,6 +213,17 @@ if(data)
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/crear/:id`} render={() => <BloquesNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/detalle/:id`} render={() => <BloquesEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/bloques/modificar/:id`} render={() => <BloquesEditar modificar={true} Access={this.Access}/>} />
+  {/* partido_bloques
+  */}
+<Route exact path={`${process.env.PUBLIC_URL}/partido_bloques/:id`} render={() => <PartidosBloque Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/PARTIDO_BLOQUE/crear/:id`} render={() => <PartidosBloqueNuevo Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/PARTIDO_BLOQUE/detalle/:id`} render={() => <PartidosBloqueEditar modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/PARTIDO_BLOQUE/modificar/:id`} render={() => <PartidosBloqueEditar modificar={true} Access={this.Access}/>} />
+  {/* DETALLE PARTIDO  bloque */}
+<Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO_bloque/:id`} render={() => <DETALLE_PARTIDOBLOQUE Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO_bloque/crear/:id`} render={() => <DETALLE_PARTIDONuevoBLOQUE Access={this.Access} auth={this.state.auth}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO_bloque/detalle/:id`} render={() => <DETALLE_PARTIDOEditarBLOQUE modificar={false} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO_bloque/modificar/:id`} render={() => <DETALLE_PARTIDOEditarBLOQUE modificar={true} Access={this.Access}/>} />
   {/* DETALLE PARTIDO   */}
 <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/:id`} render={() => <DETALLE_PARTIDO Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/crear/:id`} render={() => <DETALLE_PARTIDONuevo Access={this.Access} auth={this.state.auth}/>} />

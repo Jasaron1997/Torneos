@@ -4,7 +4,7 @@ import { Link, Redirect,withRouter } from "react-router-dom";
 
 const estadoInicial = { BuscarDatos: "", data: null };
 
-class Partidos extends Component {
+class PARTIDO_BLOQUE extends Component {
   constructor(props) {
     super(props);
     this.state = { data: estadoInicial };
@@ -12,12 +12,15 @@ class Partidos extends Component {
 
   Buscar = async () =>{
     const { id } = this.props.match.params;
-    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/Partidos/byBloques/${id}`);
+    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/PARTIDO_BLOQUE/bytorneo/${id}`);
     this.setState({ dataFiltrada: data.data, data: data.data,estado:"Re Activar"});
   }
 
    componentDidMount() {
    this.Buscar();
+
+
+
   }
   // cambioEstado = async (e) => {
   //  const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/piloto`);
@@ -51,13 +54,13 @@ Eliminar = async (item) => {
 await this.setState({...item})
 
   const data = await fetchPost(
-    `${process.env.REACT_APP_SERVER}/api/Partidos/delete`,this.state
+    `${process.env.REACT_APP_SERVER}/api/PARTIDO_BLOQUE/delete`,this.state
   );
   alert(data.message);
 
 await this.setState({...estadoInicial})
   const { id } = this.props.match.params;
-  const dataGet = await fetchGet(`${process.env.REACT_APP_SERVER}/api/Partidos/byBloques/${id}`);
+  const dataGet = await fetchGet(`${process.env.REACT_APP_SERVER}/api/PARTIDO_BLOQUE/byBloques/${id}`);
   this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
 };
 
@@ -72,7 +75,7 @@ await this.setState({...estadoInicial})
     return (
       <Fragment>
         {redireccion}
-        <h1 className="text-center mb-5">Partidos</h1>
+        <h1 className="text-center mb-5">PARTIDO_BLOQUE</h1>
         <form class="form-inline " onSubmit={this.BuscarDatos}>
           <label className="ml-5 mr-5">
             <strong>Nombre:</strong>
@@ -93,14 +96,14 @@ await this.setState({...estadoInicial})
 
         {this.props.Access("1") && (
           <Link
-            to={`${process.env.PUBLIC_URL}/Partidos/crear/${this.props.match.params.id}`}
+            to={`${process.env.PUBLIC_URL}/PARTIDO_BLOQUE/crear/${this.props.match.params.id}`}
             className="btn btn-link  ml-5 mr-5"
           >
             Crear
           </Link>
         )}
         {this.state.dataFiltrada && (
-            <table class="table table-striped">
+             <table class="table table-hover"> 
             <thead>
               <tr>
                 <th scope="col">FECHA</th>
@@ -130,24 +133,7 @@ await this.setState({...estadoInicial})
                    <td>{item.ARBITRO2}</td>
                    <td>{item.ARBITRO3}</td>
                    <td>
-                
-                    {this.props.Access("1")  && (
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Partidos/modificar/${item.ID_PARTIDO}`}
-                        className="btn btn-warning m-1"
-                      >
-                        Modificar
-                      </Link>
-                    )}
 
-                    {this.props.Access("1") && (
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Partidos/detalle/${item.ID_PARTIDO}`}
-                        className="btn btn-primary m-1"
-                      >
-                        Detalles
-                      </Link>
-                    )}
                     {this.props.Access("1")  &&(
                       <button
                         onClick={() => {
@@ -163,16 +149,16 @@ await this.setState({...estadoInicial})
                     )}
                      {this.props.Access("1")  && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO/${item.ID_PARTIDO}`}
+                        to={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO_bloque/${item.ID_PARTIDO_BLOQUE}`}
                         className="btn btn-info m-1"
                       >
                         Detalles del partido
                       </Link>
-                    )}
-                 </td>
+                    )} 
+                 </td> 
                   {/* </td> */}
                   {/* </tr> */}
-                </tr>
+                  </tr>
               );
             })}
          </tbody>
@@ -183,4 +169,4 @@ await this.setState({...estadoInicial})
   }
 }
 
-export default withRouter(Partidos);
+export default withRouter(PARTIDO_BLOQUE);

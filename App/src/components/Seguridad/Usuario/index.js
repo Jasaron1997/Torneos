@@ -104,28 +104,28 @@ await this.setState({
        
 
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-md-2 col-sm-12 col-xs-2">NOMBRE1</div>
-             {/* <div className="col-md-2  d-none  d-sm-block ">Contraseña</div> */}
-              <div className="col-md-2   d-none  d-sm-block">NOMBRE2</div>
-              <div className="col-md-2 d-none  d-sm-block">APELLIDO1</div>
-              <div className="col-md-2  d-none  d-sm-block ">APELLIDO2</div>
-              <div className="col-md-1   d-none  d-sm-block">USUARIO</div>
-              <div className="col-sm-3 col-xs-3">OPCIONES</div>
-
-            </div>
+          <table class="table table-hover">
+          <thead>
+            <tr>
+            <th scope="col">NOMBRE1</th>
+               <th scope="col">NOMBRE2</th>
+             <th scope="col">APELLIDO1</th>
+             <th scope="col">APELLIDO2</th>
+             <th scope="col">USUARIO</th>
+             <th scope="col">OPCIONES</th>
+            </tr>
+</thead>
+<tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_USUARIO } = item;
               return (
-                <div className="row border" key={ID_USUARIO}>
-                  <div className="col-md-2 col-sm-6 col-xs-2">{item.NOMBRE1}</div>
-                  {/* <div className="col-md-2 col-sm-6 col-xs-4">{item.CONTRA_USUARIO}</div> */}
-                  <div className="col-md-2 col-sm-6 col-xs-2">{item.NOMBRE2}</div>
-                  <div className="col-md-2  d-none  d-sm-block ">{item.APELLIDO1}</div>
-                  <div className="col-md-2  d-none  d-sm-block ">{item.APELLIDO2}</div>
-                  <div className="col-md-1  d-none  d-sm-block ">{item.USUARIO}</div>
-                  <div className="col-sm-3 col-xs-3">
+                <tr  key={ID_USUARIO}>
+                  <td>{item.NOMBRE1}</td>
+                  <td>{item.NOMBRE2}</td>
+                  <td>{item.APELLIDO1}</td>
+                  <td>{item.APELLIDO2}</td>
+                  <td>{item.USUARIO}</td>
+                  <td>
                 
                     {this.props.Access("1") &&(
                       <Link
@@ -158,11 +158,13 @@ await this.setState({
                         &times; Eliminar
                       </button>
                     )}
-                  </div>
-                </div>
+                  </td>
+                  </tr>
               );
             })}
-          </div>
+             </tbody>
+                </table>
+
         )}
       </Fragment>
     );

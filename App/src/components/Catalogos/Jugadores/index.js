@@ -101,23 +101,26 @@ await this.setState({...estadoInicial})
           </Link>
         )}
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-3 col-xs-3">NOMBRE_COMPLETO</div>
-              <div className="col-sm-1 col-xs-1">DEPARTAMENTO</div>
-              <div className="col-sm-1 col-xs-1">MUNICIPIO</div>
-              <div className="col-sm-1 col-xs-1">POSICION</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
-            </div>
+            <table class="table table-hover">
+            <thead>
+              <tr>
+              <th scope="col">NOMBRE_COMPLETO</th>
+              <th scope="col">DEPARTAMENTO</th>
+              <th scope="col">MUNICIPIO</th>
+              <th scope="col">POSICION</th>
+               <th scope="col">OPCIONES</th>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_JUGADOR } = item;
               return (
-                <div className="row border" key={ID_JUGADOR}>
-                  <div className="col-sm-3 col-xs-3">{item.NOMBRE_COMPLETO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.DEPARTAMENTO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.MUNICIPIO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.POSICION}</div>
-                  <div className="col-sm-4 col-xs-4">
+                <tr key={ID_JUGADOR}>
+                  <td>{item.NOMBRE_COMPLETO}</td>
+                  <td>{item.DEPARTAMENTO}</td>
+                  <td>{item.MUNICIPIO}</td>
+                  <td>{item.POSICION}</td>
+                  <td>
                 
                     {this.props.Access("1")  && (
                       <Link
@@ -149,13 +152,14 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
-                  </div>
+                         </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );

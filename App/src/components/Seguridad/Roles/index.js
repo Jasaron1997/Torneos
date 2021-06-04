@@ -99,19 +99,22 @@ Eliminar = async (item) => {
         )}
 
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-4 col-xs-4">NOMBRE</div>
-              <div className="col-sm-4 col-xs-4 d-none d-sm-block">NIVEL_AUTORIZACION</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
-            </div>
+             <table class="table table-hover"> 
+            <thead>
+              <tr>
+              <td>NOMBRE</td>
+              <td>NIVEL_AUTORIZACION</td>
+              <td>OPCIONES</td>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_ROL } = item;
               return (
-                <div className="row border" key={ID_ROL}>
-                  <div className="col-sm-4 col-xs-4">{item.NOMBRE_ROL}</div>
-                  <div className="col-sm-4 col-xs-4 d-none d-sm-block">{item.NIVEL_AUTORIZACION}</div>    
-                  <div className="col-sm-4 col-xs-4">
+                <tr key={ID_ROL}>
+                 <td>{item.NOMBRE_ROL}</td>
+                 <td>{item.NIVEL_AUTORIZACION}</td>    
+                 <td>
                 
                     {this.props.Access("1")  &&  (
                       <Link
@@ -143,13 +146,14 @@ Eliminar = async (item) => {
                         &times; Eliminar
                       </button>
                     )}
-                  </div>
+                         </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );
