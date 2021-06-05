@@ -55,7 +55,7 @@ export async function byEquipo(req, res) {
   try {
   const { ID } = req.params;
 const wuer=
-`select jpe.*,eq.NOMBRE EQUIPO,JUG.NOMBRE_COMPLETO JUGADOR,pos.NOMBRE POSICION  from JUGADORES_POR_EQUIPO jpe
+`select jpe.*,eq.NOMBRE EQUIPO,JUG.NOMBRE_COMPLETO JUGADOR,pos.NOMBRE POSICION ,JUG.NOMBRE1 from JUGADORES_POR_EQUIPO jpe
 inner join EQUIPOS eq on eq.ID_EQUIPO=jpe.ID_EQUIPO
 inner join  JUGADORES jug on jug.ID_JUGADOR=jpe.ID_JUGADOR
 inner join  POSCICIONES POS on POS.ID_POSICION=jpe.ID_POSICION

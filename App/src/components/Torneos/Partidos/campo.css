@@ -301,7 +301,6 @@
   right: 0px;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #DFd_1 {
   position: absolute;
@@ -309,7 +308,6 @@
   right: 165px;
   width: 50px;
   height: 30px;
-  border: 3px solid #0957bd;
 }
 #DFm_A1 {
   position: absolute;
@@ -317,7 +315,6 @@
   right: 165px;
   width: 50px;
   height: 30px;
-  border: 3px solid #0957bd;
 }
 #DFm_B1 {
   position: absolute;
@@ -325,7 +322,6 @@
   right: 165px;
   width: 50px;
   height: 30px;
-  border: 3px solid #0957bd;
 }
 #DFi_1 {
   position: absolute;
@@ -333,7 +329,6 @@
   right: 165px;
   width: 50px;
   height: 30px;
-  border: 3px solid #0957bd;
 }
 #MDI1 {
   position: absolute;
@@ -341,7 +336,6 @@
   right: 255px;
   width: 50px;
   height: 30px;
-  border: 3px solid #cc0526;
 }
 #MDC_A1 {
   position: absolute;
@@ -349,7 +343,6 @@
   right: 255px;
   width: 50px;
   height: 30px;
-  border: 3px solid #cc0526;
 }
 #MDC_B1 {
   position: absolute;
@@ -357,7 +350,6 @@
   right: 255px;
   width: 50px;
   height: 30px;
-  border: 3px solid #cc0526;
 }
 #MDD1 {
   position: absolute;
@@ -365,7 +357,6 @@
   right: 255px;
   width: 50px;
   height: 30px;
-  border: 3px solid #cc0526;
 }
 #DL_b1 {
   position: absolute;
@@ -373,7 +364,6 @@
   right: 325px;
   width: 50px;
   height: 30px;
-  border: 3px solid rgb(178, 218, 33);
 }
 #DL_a1 {
   position: absolute;
@@ -381,7 +371,6 @@
   right: 325px;
   width: 50px;
   height: 30px;
-  border: 3px solid rgb(178, 218, 33);
 }
 /*segundo equipo*/
 
@@ -391,7 +380,6 @@
   right: 0;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #DFi2 {
   position: absolute;
@@ -399,7 +387,6 @@
   right: -85px;
   width: 50px;
   height: 30px;
-  border: 3px solid #21ad57;
 }
 #DFm_A2 {
   position: absolute;
@@ -407,7 +394,6 @@
   right: -85px;
   width: 50px;
   height: 30px;
-  border: 3px solid #21ad57;
 }
 #DFm_B2 {
   position: absolute;
@@ -415,7 +401,6 @@
   right: -85px;
   width: 50px;
   height: 30px;
-  border: 3px solid #21ad38;
 }
 #DFd_2 {
   position: absolute;
@@ -423,7 +408,6 @@
   right: -85px;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #MDI_2 {
   position: absolute;
@@ -431,7 +415,6 @@
   right: -165px;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #MDC_A2 {
   position: absolute;
@@ -439,7 +422,6 @@
   right: -165px;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #MDC_B2 {
   position: absolute;
@@ -447,7 +429,6 @@
   right: -175px;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #MDD2 {
   position: absolute;
@@ -455,7 +436,6 @@
   right: -175px;
   width: 50px;
   height: 30px;
-  border: 3px solid #ad4221;
 }
 #DL_A2 {
   position: absolute;
@@ -463,7 +443,6 @@
   right: -255px;
   width: 50px;
   height: 30px;
-  border: 3px solid #1a2f8b;
 }
 #DL_B2 {
   position: absolute;
@@ -471,5 +450,8 @@
   right: -255px;
   width: 50px;
   height: 30px;
-  border: 3px solid #1a2f8b;
+}
+
+.h4 {
+  font-size: 8px !important;
 }

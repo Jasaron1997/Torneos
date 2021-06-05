@@ -155,6 +155,14 @@ await this.setState({...estadoInicial})
                         Detalles del partido
                       </Link>
                     )} 
+                    {this.props.Access("1")  && (
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/ver_cancha/${item.ID_PARTIDO_BLOQUE}`}
+                        className="btn btn-info m-1"
+                      >
+                        Ver cancha
+                      </Link>
+                    )}
                  </td> 
                   {/* </td> */}
                   {/* </tr> */}
