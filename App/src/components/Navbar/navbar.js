@@ -162,6 +162,12 @@ class navbar extends Component {
                       >
                        Torneos
                       </Link>
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/Torneos/campo`}
+                        className="dropdown-item"
+                      >
+                       campo
+                      </Link>
                   </div>
                 </div>
                 

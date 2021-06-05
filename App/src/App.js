@@ -64,6 +64,7 @@ import DETALLE_PARTIDO from "./components/Torneos/Detalle";
 import DETALLE_PARTIDONuevo from "./components/Torneos/Detalle/Nuevo";
 import DETALLE_PARTIDOEditar from "./components/Torneos/Detalle/Editar";
 
+import Campo from "./components/Torneos/Partidos/campo";
 
 class App extends Component {
   constructor(props) {
@@ -202,6 +203,7 @@ if(data)
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/crear`} render={() => <TorneosNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/detalle/:id`} render={() => <TorneosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/modificar/:id`} render={() => <TorneosEditar modificar={true} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/ver_cancha/:id`} render={() => <Campo modificar={true} Access={this.Access}/>} />
 
   {/* BLOQUES  */}
 <Route exact path={`${process.env.PUBLIC_URL}/bloques/:id`} render={() => <Bloques Access={this.Access}/>} />
@@ -219,7 +221,8 @@ if(data)
           <Route exact path={`${process.env.PUBLIC_URL}/partidos/crear/:id`} render={() => <PartidosNuevo Access={this.Access} auth={this.state.auth}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/partidos/detalle/:id`} render={() => <PartidosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/partidos/modificar/:id`} render={() => <PartidosEditar modificar={true} Access={this.Access}/>} />
-
+          
+ 
 
          </Switch>
         </header>
