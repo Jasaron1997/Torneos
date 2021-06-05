@@ -97,7 +97,7 @@ await this.setState({...estadoInicial})
         {this.props.Access("1") && (
           <Link
             to={`${process.env.PUBLIC_URL}/PARTIDO_BLOQUE/crear/${this.props.match.params.id}`}
-            className="btn btn-link  ml-5 mr-5"
+            className="btn btn-link  ml-5 mr-5 text-dark"
           >
             Crear
           </Link>
@@ -157,7 +157,7 @@ await this.setState({...estadoInicial})
                     )} 
                     {this.props.Access("1")  && (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/ver_cancha/${item.ID_PARTIDO_BLOQUE}`}
+                        to={`${process.env.PUBLIC_URL}/ver_cancha_bloque/${item.ID_PARTIDO_BLOQUE}`}
                         className="btn btn-info m-1"
                       >
                         Ver cancha

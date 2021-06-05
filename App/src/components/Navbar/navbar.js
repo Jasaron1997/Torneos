@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 
+import  Logo from "../../assets/logo.jpeg";
+
+
 class navbar extends Component {
   state = {};
   UpdateState = (e) => {
@@ -19,7 +22,7 @@ class navbar extends Component {
     return (
       <nav className=" navbar  navbar-expand-lg navbar-dark text-black-50 bg-Color-Extra sticky-top">
         <Link to={`${process.env.PUBLIC_URL}/`} className="navbar-brand">
-          Torneos
+        <img id="logoNa" src={Logo} width="120" height="60" /> 
         </Link>
         <button
           className="navbar-toggler"

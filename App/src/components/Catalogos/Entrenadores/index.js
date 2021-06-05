@@ -95,7 +95,7 @@ await this.setState({...estadoInicial})
         {this.props.Access("1") && (
           <Link
             to={`${process.env.PUBLIC_URL}/entrenadores/crear`}
-            className="btn btn-link  ml-5 mr-5"
+            className="btn btn-link  ml-5 mr-5 text-dark"
           >
             Crear
           </Link>

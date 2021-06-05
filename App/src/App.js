@@ -68,6 +68,7 @@ import DETALLE_PARTIDONuevo from "./components/Torneos/Detalle/Nuevo";
 import DETALLE_PARTIDOEditar from "./components/Torneos/Detalle/Editar";
 
 import Campo from "./components/Torneos/Partidos/campo";
+import CampoBloque from "./components/Torneos/PartidosBLOQUE/campo";
 import DETALLE_PARTIDOBLOQUE from "./components/Torneos/PartidosBLOQUE/Detalle";
 import DETALLE_PARTIDONuevoBLOQUE from "./components/Torneos/PartidosBLOQUE/Detalle/Nuevo";
 import DETALLE_PARTIDOEditarBLOQUE from "./components/Torneos/PartidosBLOQUE/Detalle/Editar";
@@ -210,6 +211,7 @@ if(data)
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/detalle/:id`} render={() => <TorneosEditar modificar={false} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/Torneos/modificar/:id`} render={() => <TorneosEditar modificar={true} Access={this.Access}/>} />
           <Route exact path={`${process.env.PUBLIC_URL}/ver_cancha/:id`} render={() => <Campo modificar={true} Access={this.Access}/>} />
+          <Route exact path={`${process.env.PUBLIC_URL}/ver_cancha_bloque/:id`} render={() => <CampoBloque modificar={true} Access={this.Access}/>} />
 
   {/* BLOQUES  */}
 <Route exact path={`${process.env.PUBLIC_URL}/bloques/:id`} render={() => <Bloques Access={this.Access}/>} />
