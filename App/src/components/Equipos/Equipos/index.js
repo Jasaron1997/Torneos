@@ -101,25 +101,28 @@ await this.setState({...estadoInicial})
           </Link>
         )}
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-1 col-xs-1">NOMBRE</div>
-              <div className="col-sm-1 col-xs-1">DIRECCION</div>
-              <div className="col-sm-2 col-xs-2">DEPARTAMENTO</div>
-              <div className="col-sm-1 col-xs-1">MUNICIPIO</div>
-              <div className="col-sm-1 col-xs-1">ENTRENADOR</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
-            </div>
+            <table class="table table-hover">
+            <thead>
+              <tr>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">DIRECCION</th>
+               <th scope="col">DEPARTAMENTO</th>
+              <th scope="col">MUNICIPIO</th>
+              <th scope="col">ENTRENADOR</th>
+               <th scope="col">OPCIONES</th>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_EQUIPO } = item;
               return (
-                <div className="row border" key={ID_EQUIPO}>
-                  <div className="col-sm-1 col-xs-1">{item.NOMBRE}</div>
-                  <div className="col-sm-1 col-xs-1">{item.DIRECCION}</div>
-                  <div className="col-sm-2 col-xs-2">{item.DEPARTAMENTO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.MUNICIPIO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.ENTRENADOR}</div>
-                  <div className="col-sm-4 col-xs-4">
+                <tr key={ID_EQUIPO}>
+                  <td>{item.NOMBRE}</td>
+                  <td>{item.DIRECCION}</td>
+                   <td>{item.DEPARTAMENTO}</td>
+                  <td>{item.MUNICIPIO}</td>
+                  <td>{item.ENTRENADOR}</td>
+                  <td>
                 
                     {this.props.Access("1")  && (
                       <Link
@@ -151,13 +154,14 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
-                  </div>
+                         </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );

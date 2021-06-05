@@ -101,23 +101,27 @@ await this.setState({...estadoInicial})
           </Link>
         )}
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-3 col-xs-3">NOMBRE</div>
-              <div className="col-sm-1 col-xs-1">FECHA</div>
-              <div className="col-sm-1 col-xs-1">DEPARTAMENTO</div>
-              <div className="col-sm-1 col-xs-1">MUNICIPIO</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
-            </div>
+         <table class="table table-hover">
+            <thead>
+              <tr>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">FECHA</th>
+              <th scope="col">DEPARTAMENTO</th>
+              <th scope="col">MUNICIPIO</th>
+              <th scope="col">OPCIONES</th>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_TORNEO } = item;
               return (
-                <div className="row border" key={ID_TORNEO}>
-                  <div className="col-sm-3 col-xs-3">{item.NOMBRE}</div>
-                  <div className="col-sm-1 col-xs-1">{new Date(item.FECHA_DE_CREACION).toLocaleDateString()}</div>
-                  <div className="col-sm-1 col-xs-1">{item.DEPARTAMENTO}</div>
-                  <div className="col-sm-1 col-xs-1">{item.MUNICIPIO}</div>
-                  <div className="col-sm-4 col-xs-4">
+               
+                <tr  key={ID_TORNEO}>
+                  <td>{item.NOMBRE}</td>
+                  <td>{new Date(item.FECHA_DE_CREACION).toLocaleDateString()}</td>
+                  <td>{item.DEPARTAMENTO}</td>
+                  <td>{item.MUNICIPIO}</td>
+                  <td>
                 
                     {this.props.Access("1")  && (
                       <Link
@@ -157,13 +161,22 @@ await this.setState({...estadoInicial})
                         bloques
                       </Link>
                     )}
-                  </div>
+                      {this.props.Access("1")  && (
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/partido_bloques/${item.ID_TORNEO}`}
+                        className="btn btn-info m-1"
+                      >
+                        partidos de bloque
+                      </Link>
+                    )}
+                 </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );

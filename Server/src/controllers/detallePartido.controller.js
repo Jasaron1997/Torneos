@@ -96,6 +96,33 @@ export async function Create(req, res) {
       });
   }
 }
+export async function Create_bloque(req, res) {
+  const { ID_EQUIPO, GOL, FECHA_CREACION,ID_JUGADOR,ID_PARTIDO } = req.body;
+  try {
+    const datos = await sequelize.query(
+      `EXEC INSERTAR_DETALLE_PARTIDO_BLOQUE  @ID_EQUIPO=:ID_EQUIPO,@GOL=:GOL,@FECHA_CREACION=:FECHA_CREACION,
+      @ID_JUGADOR=:ID_JUGADOR,@ID_PARTIDO=:ID_PARTIDO                                              `,
+      {
+        replacements: { ID_EQUIPO, GOL, FECHA_CREACION,ID_JUGADOR,ID_PARTIDO },
+        type: sequelize.QueryTypes.SELECT,
+      }
+    );
+    if (datos) {
+      return res.json({
+        message: "Operacion realizada con exito del DETALLE_PARTIDO",
+        data: datos,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({
+        message: "No se pudo realizar la operacion del DETALLE_PARTIDO.",
+        data: [],
+      });
+  }
+}
 export async function Update(req, res) {
   const { ID_DETALLE_PARTIDO, ID_EQUIPO, GOL, FECHA_CREACION } = req.body;
   try {

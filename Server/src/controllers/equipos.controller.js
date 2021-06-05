@@ -71,6 +71,36 @@ export async function byPartido(req, res) {
       .json({ message: "No se pudo encontraron datos del EQUIPOS.", data: [] });
   }
 }
+export async function byPartidoBloque(req, res) {
+  const { ID } = req.params;
+  try {
+    console.log(ID)
+    const datos = await sequelize.query(
+      `
+      select  visitante.*,par.ID_PARTIDO_BLOQUE
+      from PARTIDO_BLOQUE par
+      inner join EQUIPOS visitante on visitante.ID_EQUIPO=par.ID_VISITANTE
+    where par.ID_PARTIDO_BLOQUE=${ID}
+  union all
+  select locall.*,par.ID_PARTIDO_BLOQUE
+      from PARTIDO_BLOQUE par
+      inner join EQUIPOS locall on locall.ID_EQUIPO=par.ID_LOCAL
+      where par.ID_PARTIDO_BLOQUE=${ID}  `,
+      { replacements: {}, type: sequelize.QueryTypes.SELECT }
+    );
+    if (datos) {
+      return res.json({
+        message: "SE ENCONTRARON DATOS DE EQUIPOS",
+        data: datos,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ message: "No se pudo encontraron datos del EQUIPOS.", data: [] });
+  }
+}
 export async function Create(req, res) {
   const {
     NOMBRE,

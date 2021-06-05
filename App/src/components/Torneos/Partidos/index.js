@@ -100,33 +100,36 @@ await this.setState({...estadoInicial})
           </Link>
         )}
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-1 col-xs-1">FECHA</div>
-              <div className="col-sm-1 col-xs-1">BLOQUE</div>
-              <div className="col-sm-1 col-xs-1">LOCAL</div>
-              <div className="col-sm-1 col-xs-1">VISITANTE</div>
-              <div className="col-sm-1 col-xs-1">GOLES LOCAL</div>
-              <div className="col-sm-1 col-xs-1">GOLES VISITANTES</div>
-              <div className="col-sm-1 col-xs-1">ARBITRO 1</div>
-              <div className="col-sm-1 col-xs-1">ARBITRO 2</div>
-              <div className="col-sm-1 col-xs-1">ARBITRO 3</div>
-              <div className="col-sm-3 col-xs-3">OPCIONES</div>
-            </div>
+            <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">FECHA</th>
+                <th scope="col">BLOQUE</th>
+                <th scope="col">LOCAL</th>
+                <th scope="col">VISITANTE</th>
+                <th scope="col">GOLES LOCAL</th>
+                <th scope="col">GOLES VISITANTES</th>
+                <th scope="col">ARBITRO 1</th>
+                <th scope="col">ARBITRO 2</th>
+                <th scope="col">ARBITRO 3</th>
+                <th scope="col">OPCIONES</th>
+                </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_PARTIDO } = item;
               return (
-                <div className="row border" key={ID_PARTIDO}>
-                  <div className="col-sm-1 col-xs-1">{new Date(item.FECHA_DE_CREACION).toLocaleDateString()}</div>
-                  <div className="col-sm-1 col-xs-1">{item.BLOQUE}</div>
-                  <div className="col-sm-1 col-xs-1">{item.LOCAL}</div>
-                  <div className="col-sm-1 col-xs-1">{item.VISITANTE}</div>
-                  <div className="col-sm-1 col-xs-1">{item.GOLES_LOCAL}</div>
-                  <div className="col-sm-1 col-xs-1">{item.GOLES_VISITANTE}</div>
-                  <div className="col-sm-1 col-xs-1">{item.ARBITRO1}</div>
-                  <div className="col-sm-1 col-xs-1">{item.ARBITRO2}</div>
-                  <div className="col-sm-1 col-xs-1">{item.ARBITRO3}</div>
-                  <div className="col-sm-3 col-xs-3">
+                <tr key={ID_PARTIDO}>
+                   <td>{new Date(item.FECHA_DE_CREACION).toLocaleDateString()}</td>
+                   <td>{item.BLOQUE}</td>
+                   <td>{item.LOCAL}</td>
+                   <td>{item.VISITANTE}</td>
+                   <td>{item.GOLES_LOCAL}</td>
+                   <td>{item.GOLES_VISITANTE}</td>
+                   <td>{item.ARBITRO1}</td>
+                   <td>{item.ARBITRO2}</td>
+                   <td>{item.ARBITRO3}</td>
+                   <td>
                 
                     {this.props.Access("1")  && (
                       <Link
@@ -174,13 +177,14 @@ await this.setState({...estadoInicial})
                         Ver cancha
                       </Link>
                     )}
-                  </div>
+                  </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                </tr>
               );
             })}
-          </div>
+         </tbody>
+        </table>
         )}
       </Fragment>
     );

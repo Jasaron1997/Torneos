@@ -101,17 +101,20 @@ await this.setState({...estadoInicial})
           </Link>
         )}
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-6 col-xs-6">NOMBRE</div>
-              <div className="col-sm-6 col-xs-6">OPCIONES</div>
-            </div>
+            <table class="table table-hover">
+            <thead>
+              <tr>
+               <th scope="col">NOMBRE</th>
+               <th scope="col">OPCIONES</th>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_POSICION } = item;
               return (
-                <div className="row border" key={ID_POSICION}>
-                  <div className="col-sm-6 col-xs-6">{item.NOMBRE}</div>
-                  <div className="col-sm-6 col-xs-6">
+                <tr key={ID_POSICION}>
+                  <td>{item.NOMBRE}</td>
+                  <td>
                 
                     {this.props.Access("1")  && (
                       <Link
@@ -143,13 +146,14 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
-                  </div>
+                         </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );

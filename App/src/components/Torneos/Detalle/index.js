@@ -106,23 +106,25 @@ await this.setState({...estadoInicial})
           </Link>
         )}
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-3 col-xs-3">EQUIPO</div>
-              <div className="col-sm-1 col-xs-1">FECHA</div>
-              <div className="col-sm-1 col-xs-1">JUGADOR</div>
-              <div className="col-sm-1 col-xs-1">GOL</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
-            </div>
-            {this.state.dataFiltrada.map((item) => {
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">EQUIPO</th>
+                <th scope="col">FECHA</th>
+                <th scope="col">JUGADOR</th>
+                <th scope="col">GOL</th>
+                <th scope="col">OPCIONES</th>
+                </tr>
+  </thead>
+  <tbody >            {this.state.dataFiltrada.map((item) => {
               const { ID_DETALLE_PARTIDO } = item;
               return (
-                <div className="row border" key={ID_DETALLE_PARTIDO}>
-                  <div className="col-sm-3 col-xs-3">{item.EQUIPO}</div>
-                  <div className="col-sm-1 col-xs-1">{new Date(item.FECHA_CREACION).toLocaleString()}</div>
-                  <div className="col-sm-1 col-xs-1">{item.JUGADOR}</div>
-                  <div className="col-sm-1 col-xs-1">{item.GOL}</div>
-                  <div className="col-sm-4 col-xs-4">
+                <tr key={ID_DETALLE_PARTIDO}>
+                  <td>{item.EQUIPO}</td>
+                  <td>{new Date(item.FECHA_CREACION).toLocaleString()}</td>
+                  <td>{item.JUGADOR}</td>
+                  <td>{item.GOL}</td>
+                  <td>
                 
                     {/* {this.props.Access("1")  && (
                       <Link
@@ -154,13 +156,14 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
-                  </div>
+                         </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );

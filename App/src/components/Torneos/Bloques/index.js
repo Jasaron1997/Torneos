@@ -99,20 +99,24 @@ await this.setState({...estadoInicial})
             Crear
           </Link>
         )}
+       
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-4 col-xs-4">NOMBRE</div>
-              <div className="col-sm-4 col-xs-4">TORNEO</div>
-              <div className="col-sm-4 col-xs-4">OPCIONES</div>
-            </div>
+            <table class="table table-hover">
+            <thead>
+              <tr>
+             <th scope="col">NOMBRE</th>
+             <th scope="col">TORNEO</th>
+              <th scope="col">OPCIONES</th>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_BLOQUE } = item;
               return (
-                <div className="row border" key={ID_BLOQUE}>
-                  <div className="col-sm-4 col-xs-4">{item.NOMBRE}</div>
-                  <div className="col-sm-4 col-xs-4">{item.TORNEO}</div>
-                  <div className="col-sm-4 col-xs-4">
+                <tr key={ID_BLOQUE}>
+                  <td>{item.NOMBRE}</td>
+                  <td>{item.TORNEO}</td>
+                  <td>
                 
                     {this.props.Access("1")  && (
                       <Link
@@ -152,13 +156,14 @@ await this.setState({...estadoInicial})
                         Partidos
                       </Link>
                     )}
-                  </div>
+                         </td>
                   {/* </td> */}
                   {/* </tr> */}
-                </div>
+                  </tr>
               );
             })}
-          </div>
+            </tbody>
+        </table>
         )}
       </Fragment>
     );

@@ -93,19 +93,23 @@ await this.setState({...estadoInicial})
         </form>
 
         {this.state.dataFiltrada && (
-          <div className="ml-5 mr-5">
-            <div className="row border">
-              <div className="col-sm-12 col-xs-12">NOMBRE</div>
-            </div>
+            <table class="table table-hover">
+            <thead>
+              <tr>
+              <th scope="col">NOMBRE</th>
+              </tr>
+  </thead>
+  <tbody >
             {this.state.dataFiltrada.map((item) => {
               const { ID_DEPARTAMENTO } = item;
               return (
-                <div className="row border" key={ID_DEPARTAMENTO}>
-                  <div className="col-sm-12 col-xs-12">{item.NOMBRE}</div>
-                </div>
+                <tr key={ID_DEPARTAMENTO}>
+               <td>{item.NOMBRE}</td>
+               </tr>
               );
             })}
-          </div>
+         </tbody>
+        </table>
         )}
       </Fragment>
     );

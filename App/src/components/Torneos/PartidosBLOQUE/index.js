@@ -1,22 +1,26 @@
 import React, { Component, Fragment } from "react";
 import { fetchGet,fetchDelete, fetchPost} from "../../../utils/Fetch";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect,withRouter } from "react-router-dom";
 
 const estadoInicial = { BuscarDatos: "", data: null };
 
-class Jugadores extends Component {
+class PARTIDO_BLOQUE extends Component {
   constructor(props) {
     super(props);
     this.state = { data: estadoInicial };
   }
 
   Buscar = async () =>{
-    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/Jugadores/all`);
+    const { id } = this.props.match.params;
+    const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/PARTIDO_BLOQUE/bytorneo/${id}`);
     this.setState({ dataFiltrada: data.data, data: data.data,estado:"Re Activar"});
   }
 
    componentDidMount() {
    this.Buscar();
+
+
+
   }
   // cambioEstado = async (e) => {
   //  const data = await fetchGet(`${process.env.REACT_APP_SERVER}/api/piloto`);
@@ -30,7 +34,7 @@ class Jugadores extends Component {
   BuscarDatos = (e) => {
     e.preventDefault();
     const patt = new RegExp(`${this.state.BuscarDatos}`, "gi");
-    const datos = this.state.data.filter((dat) => patt.exec(dat.NOMBRE_COMPLETO));
+    const datos = this.state.data.filter((dat) => patt.exec(dat.LOCAL));
 
     this.setState({
       dataFiltrada: datos,
@@ -50,15 +54,13 @@ Eliminar = async (item) => {
 await this.setState({...item})
 
   const data = await fetchPost(
-    `${process.env.REACT_APP_SERVER}/api/Jugadores/delete`,this.state
+    `${process.env.REACT_APP_SERVER}/api/PARTIDO_BLOQUE/delete`,this.state
   );
   alert(data.message);
 
 await this.setState({...estadoInicial})
-
-  const dataGet = await fetchGet(
-    `${process.env.REACT_APP_SERVER}/api/Jugadores/all`
-  );
+  const { id } = this.props.match.params;
+  const dataGet = await fetchGet(`${process.env.REACT_APP_SERVER}/api/PARTIDO_BLOQUE/byBloques/${id}`);
   this.setState({ dataFiltrada: dataGet.data, data: dataGet.data });
 };
 
@@ -73,10 +75,10 @@ await this.setState({...estadoInicial})
     return (
       <Fragment>
         {redireccion}
-        <h1 className="text-center mb-5">Jugadores</h1>
+        <h1 className="text-center mb-5">PARTIDO_BLOQUE</h1>
         <form class="form-inline " onSubmit={this.BuscarDatos}>
           <label className="ml-5 mr-5">
-            <strong>NOMBRE COMPLETO:</strong>
+            <strong>Nombre:</strong>
           </label>
           <input
             class="form-control mr-sm-5"
@@ -94,55 +96,48 @@ await this.setState({...estadoInicial})
 
         {this.props.Access("1") && (
           <Link
-            to={`${process.env.PUBLIC_URL}/Jugadores/crear`}
+            to={`${process.env.PUBLIC_URL}/PARTIDO_BLOQUE/crear/${this.props.match.params.id}`}
             className="btn btn-link  ml-5 mr-5"
           >
             Crear
           </Link>
         )}
         {this.state.dataFiltrada && (
-            <table class="table table-hover">
+             <table class="table table-hover"> 
             <thead>
               <tr>
-              <th scope="col">NOMBRE_COMPLETO</th>
-              <th scope="col">DEPARTAMENTO</th>
-              <th scope="col">MUNICIPIO</th>
-              <th scope="col">POSICION</th>
-               <th scope="col">OPCIONES</th>
-              </tr>
+                <th scope="col">FECHA</th>
+                <th scope="col">BLOQUE</th>
+                <th scope="col">LOCAL</th>
+                <th scope="col">VISITANTE</th>
+                <th scope="col">GOLES LOCAL</th>
+                <th scope="col">GOLES VISITANTES</th>
+                <th scope="col">ARBITRO 1</th>
+                <th scope="col">ARBITRO 2</th>
+                <th scope="col">ARBITRO 3</th>
+                <th scope="col">OPCIONES</th>
+                </tr>
   </thead>
   <tbody >
             {this.state.dataFiltrada.map((item) => {
-              const { ID_JUGADOR } = item;
+              const { ID_PARTIDO } = item;
               return (
-                <tr key={ID_JUGADOR}>
-                  <td>{item.NOMBRE_COMPLETO}</td>
-                  <td>{item.DEPARTAMENTO}</td>
-                  <td>{item.MUNICIPIO}</td>
-                  <td>{item.POSICION}</td>
-                  <td>
-                
-                    {this.props.Access("1")  && (
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Jugadores/modificar/${item.ID_JUGADOR}`}
-                        className="btn btn-warning m-1"
-                      >
-                        Modificar
-                      </Link>
-                    )}
+                <tr key={ID_PARTIDO}>
+                   <td>{new Date(item.FECHA_DE_CREACION).toLocaleDateString()}</td>
+                   <td>{item.BLOQUE}</td>
+                   <td>{item.LOCAL}</td>
+                   <td>{item.VISITANTE}</td>
+                   <td>{item.GOLES_LOCAL}</td>
+                   <td>{item.GOLES_VISITANTE}</td>
+                   <td>{item.ARBITRO1}</td>
+                   <td>{item.ARBITRO2}</td>
+                   <td>{item.ARBITRO3}</td>
+                   <td>
 
-                    {this.props.Access("1") && (
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/Jugadores/detalle/${item.ID_JUGADOR}`}
-                        className="btn btn-primary m-1"
-                      >
-                        Detalles
-                      </Link>
-                    )}
                     {this.props.Access("1")  &&(
                       <button
                         onClick={() => {
-                          if (window.confirm("Seguro que deseas eliminar al jugador")) {
+                          if (window.confirm("Seguro que deseas eliminar el partido")) {
                             this.Eliminar(item);
                           }
                         }}
@@ -152,13 +147,21 @@ await this.setState({...estadoInicial})
                         &times; Eliminar
                       </button>
                     )}
-                         </td>
+                     {this.props.Access("1")  && (
+                      <Link
+                        to={`${process.env.PUBLIC_URL}/DETALLE_PARTIDO_bloque/${item.ID_PARTIDO_BLOQUE}`}
+                        className="btn btn-info m-1"
+                      >
+                        Detalles del partido
+                      </Link>
+                    )} 
+                 </td> 
                   {/* </td> */}
                   {/* </tr> */}
                   </tr>
               );
             })}
-            </tbody>
+         </tbody>
         </table>
         )}
       </Fragment>
@@ -166,4 +169,4 @@ await this.setState({...estadoInicial})
   }
 }
 
-export default Jugadores;
+export default withRouter(PARTIDO_BLOQUE);
